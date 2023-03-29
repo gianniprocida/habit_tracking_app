@@ -17,7 +17,8 @@ class Habit:
         self.creation_date = datetime.date.today()
         self.completed_date = None
     def check_off(self,completed):
-        if len(self.checkoffList) >= len(self.period):
+        ans = 0
+        if len(self.checkoffList) >= self.period:
             print("Done")
             self.last_completed = datetime.date.today()
             return 
@@ -41,7 +42,11 @@ class HabitTracker:
     def __init__(self,user):
         self.user = user
         self.habits = []
-    def search(self,name):
+    def search_by_id(self,id):
+        # It'll be faster searching an habit by id
+        pass
+    def search_by_name(self,name):
+        res = None
         for index,habit in enumerate(self.habits):
             if name == habit.name:
                 res = (habit.name,index)
@@ -49,7 +54,11 @@ class HabitTracker:
             print("Habit not found")
         return res
     def addHabit(self,name,start,end,freq):
-        self.habits.append(Habit(name,start,end,freq))
+        if self.search_by_name(name):
+            print("Already added! ")
+        else:
+            print("Adding your habit..")
+            self.habits.append(Habit(name,start,end,freq))
         return 
     def modifyHabit(self,name,start=None,end=None,freq=None):
         if not bool(start) and not bool(end) and bool(freq):
@@ -64,10 +73,9 @@ class HabitTracker:
 
 
 h1 = Habit("Brush your teeth","2023-03-01","2023-03-30","D")
-tracker = HabitTracker("maria")
+tracker = HabitTracker("John")
 tracker.addHabit("Brush your teeth","2023-03-01","2023-03-30","D")
 tracker.addHabit("Go to school","2023-03-02","2023-03-25","D")
-
-a = tracker.search("Go to school")
-
+a = tracker.search_by_name("Go to school")
+a = tracker.search_by_name("Go to work")
 print(tracker.habits)
