@@ -103,8 +103,6 @@ class HabitTracker:
     
     def addHabit(self,name,start,end,freq):
         (cnx,cur) = self.getConn()
-   #     usedb = """use HabitTrackerdb"""
-   #     cur.execute(usedb)
         try:
            add_query = """insert into HabitTracker (user,habit,start,end,freq) values (%s,%s,%s,%s,%s)"""
            data = (self.user,name,start,end,freq)
