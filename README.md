@@ -6,7 +6,7 @@
 <body>
     <h1>Problem Statement</h1>
     <hr>
-     <p> Create a Habit Tracking App .</a></p>
+     <p> Create a Habit Tracking App (database-driven) .</a></p>
     <h2>Final approach</h2>
     
   <ul>  
