@@ -56,7 +56,7 @@ class HabitTracker:
         self.user = user
         self.habits = []
     def getConn(self):
-        cnx = mysql.connector.connect(host="localhost",user="root",password="Chimica90$",database="HabitTrackerdb")
+        cnx = mysql.connector.connect(host="localhost",user="root",password="",database="HabitTrackerdb")
         cur = cnx.cursor()
         return cnx, cur
     def createTable(self):
