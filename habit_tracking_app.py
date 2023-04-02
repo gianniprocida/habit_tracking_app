@@ -18,7 +18,7 @@ class Habit:
         self.creation_date = datetime.date.today()
         self.completed = False
         self.longest_habit_streak = None
-        self.count_of_completed_activities = None
+        self.count_of_completed_habit = None
     def checkoff(self,check):
         ans = 0
         if not self.completed:
@@ -35,10 +35,13 @@ class Habit:
                   while j < len(self.checkoffList) and self.checkoffList[j] == self.checkoffList[i]=="y":
                     j+=1
                   ans = max(ans,j-i)  
-              print(ans)
+        else:
+              print("No need to checkoff no more...")
+              print("Exit...")
+              return 
         if len(self.checkoffList) == self.period:# and datetime.date.today() == self.end
             self.completed = True
-            self.count_of_completed_activities = self.checkoffList.count("y")
+            self.count_of_completed_habit = self.checkoffList.count("y")
             self.longest_habit_streak = ans
 
                  
@@ -74,25 +77,20 @@ class HabitTracker:
         elif bool(freq):
             pass
         return 
+    
 
 
 
 tracker = HabitTracker("John")
 tracker.addHabit("Brush your teeth","2023-03-01","2023-03-4","D")
 tracker.addHabit("Go to school","2023-03-02","2023-03-06","D")
-a = tracker.search_by_name("Go to school")
-a = tracker.search_by_name("Go to work")
+tracker.habits[0].checkoff('y')
+tracker.habits[0].checkoff('y')
+tracker.habits[0].checkoff('n')
+tracker.habits[0].checkoff('y')
+print(tracker.habits[0].longest_habit_streak)
 
 
-for i in range(3):
- tracker.habits[0].checkoff("y")
- print(tracker.habits[0].completed)
- print(tracker.habits[0].longest_habit_streak)
-tracker.habits[1].checkoff("y")
-tracker.habits[1].checkoff("y")
-tracker.habits[1].checkoff("n")
-tracker.habits[1].checkoff("n")
-tracker.habits[1].checkoff("n")
 
 
 
