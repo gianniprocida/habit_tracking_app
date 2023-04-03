@@ -24,9 +24,7 @@
   </ul>
      <h2>Features</h2>
      <h3>Creating habits</h3>
-     `
-     tracker = HabitTracker("John")
-     tracker.addHabit("Brush your teeth","2023-03-01","2023-03-4","D")
+     `tracker = HabitTracker("John") tracker.addHabit("Brush your teeth","2023-03-01","2023-03-4","D")
      `
      <h3>Modifying habits</h3>
      No implemented yet.
