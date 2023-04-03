@@ -32,10 +32,8 @@ function test() {
 ```
 
      <h3>Modifying habits</h3>
-     No implemented yet.
+  
      <h3>Deleting habits</h3>
-    habit = Habit(name='Exercise', description='Do 30 minutes of exercise every day')
-habit.delete_habit()
 
 </body>
 
