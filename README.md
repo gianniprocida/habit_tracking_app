@@ -29,7 +29,7 @@
 function test() {
   console.log("notice the blank line before this function?");
 }
-```
+
 
      <h3>Modifying habits</h3>
   
