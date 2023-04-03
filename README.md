@@ -9,7 +9,7 @@
      <p>Habit tracking app that allows users to track their daily habits and 
       monitor their progress over time. Users can create, modifiy, delete, and search habits, and check off each day
     they complete the habit</a></p>
-    <h2>Final approach</h2>
+    <h2>Getting started</h2>
     csv files (pricing data ) are downloaded through web scraping, after which they are cleaned using 
     using pandas. Data are going to be distributed across several databases.
          For example, we create a database with only BTC pricing data, EOS pricing data, ETH pricing data, and LTC pricing data.
@@ -22,23 +22,13 @@
       <li>TO DO: Add Entity relationship model </li>
 
   </ul>
-     <h2>Pseudo Code</h2>
-   <ul>
-     <li>Step 1: Download csv files through web scraping</li>
-     <li>Step 2: Clean and store data in a mysql database</li>
-     <li>Step 3: Create new two tables: closingPrice and OpeningPrice. 
-        Define relationships between tables</li>
-     <li>Step 4: Analyze closingPrice table</li>
-   </ul>     
-     <h2>Codes</h2>
-    <ul>
-        <li>analysis.py -> data visualization </li>
-        <li>Load2mysql.py -> populate a mysql database with pricing data from each csv file</li>
-        <li>scraper.py -> downloads pricing data from <a href="https://www.cryptodatadownload.com/data/binance/">Click here</a> </li>
-        <li>createClosingPrice.sql -> define relationships between tables.Insert data into the closingPrice (referencing table) from other tables i.e. BTCUSDT,ETHUSDT,EOSUSDT,LTCUSDT (referenced tables)</li>
-        <li>createOpeningPrice.sql -> define relationships between tables. Insert data into the OpeningPrice (referencing table) from other tables i.e. BTCUSDT,ETHUSDT,EOSUSDT,LTCUSDT (referenced tables)</li>
-    </ul>
-
+     <h2>Features</h2>
+     <h3>Creating Habits</h3>
+     python
+     ```
+     tracker = HabitTracker("John")
+     tracker.addHabit("Brush your teeth","2023-03-01","2023-03-4","D")
+     ```
 </body>
 
 
