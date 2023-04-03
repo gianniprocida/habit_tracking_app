@@ -24,13 +24,12 @@
   </ul>
      <h2>Features</h2>
      <h3>Creating Habits</h3>
-     ```python
-# Example Python code for habit tracking app
-
-class Habit:
-    def __init__(self, name, description):
-        self.name = name
-        self.description = description
+     ```
+     
+     tracker = HabitTracker("John")
+     tracker.addHabit("Brush your teeth","2023-03-01","2023-03-4","D")
+     
+     ```
 </body>
 
 
