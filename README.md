@@ -25,9 +25,12 @@
      <h2>Features</h2>
      <h3>Creating Habits</h3>
      ```python
-     
-     tracker = HabitTracker("John")
-     tracker.addHabit("Brush your teeth","2023-03-01","2023-03-4","D")
+# Example Python code for habit tracking app
+
+class Habit:
+    def __init__(self, name, description):
+        self.name = name
+        self.description = description
 </body>
 
 
