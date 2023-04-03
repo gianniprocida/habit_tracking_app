@@ -27,7 +27,7 @@
 ```python
 print("Hello")
 ```
-
+```
      <h3>Modifying habits</h3>
      No implemented yet.
      <h3>Deleting habits</h3>
