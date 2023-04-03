@@ -29,11 +29,9 @@
      <h3>Modifying habits</h3>
      No implemented yet.
      <h3>Deleting habits</h3>
-     tracker = HabitTracker("John")
-     tracker.addHabit("Brush your teeth","2023-03-01","2023-03-4","D")
-    ```
-    print("Hello")
-    ```
+    habit = Habit(name='Exercise', description='Do 30 minutes of exercise every day')
+habit.delete_habit()
+
 </body>
 
 
