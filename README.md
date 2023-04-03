@@ -24,17 +24,14 @@
   </ul>
      <h2>Features</h2>
      <h3>Creating habits</h3>
+```python
+print("Hello")
 ```
 
-function test() {
-  console.log("notice the blank line before this function?");
-}
-
-
      <h3>Modifying habits</h3>
-  
+     No implemented yet.
      <h3>Deleting habits</h3>
-
+     
 </body>
 
 
