@@ -24,11 +24,12 @@
   </ul>
      <h2>Features</h2>
      <h3>Creating habits</h3>
-```python
-print("Hello")
+````
 ```
-print("Hello")
-     
+Look! You can see my backticks.
+```
+````
+
 </body>
 
 
