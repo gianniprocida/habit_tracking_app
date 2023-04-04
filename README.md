@@ -26,7 +26,9 @@
      <h3>Creating habits</h3>
 
 ```
-Look! You can see my backticks.
+tracker = HabitTracker("John")
+tracker.addHabit("Brush your teeth","2023-03-01","2023-03-4","D")
+
 ```
 
 <h3>Deleting habits</h3>
