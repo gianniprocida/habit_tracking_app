@@ -28,25 +28,25 @@
 ```
 tracker = HabitTracker("John")
 tracker.addHabit("Brush your teeth","2023-03-01","2023-03-4","D")
-
+tracker.addHabit("Go to school","2023-03-02","2023-04-30","D")
 ```
 
 <h3>Deleting habits</h3>
 
 ```
-Look! You can see my backticks.
+tracker.deleteHabit("Go to school")
 ```
 
 <h3>Searching by name</h3>
 
 ```
-Look! You can see my backticks.
+(myhabit,index) = tracker.search_by_name("Brush your teeth")
 ```
 
 <h3>Searching by id</h3>
 
 ```
-Look! You can see my backticks.
+output = tracker.search_by_id(1)
 ```
 </body>
 
