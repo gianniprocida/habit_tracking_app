@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<style>
-
-
-</style>
     <meta charset="UTF-8">
 </head>
 <body>
@@ -17,13 +13,13 @@
 
 Before using the Habit Tracker App make sure you have Python3 installed on your computer.
 <h3>How to run it?</h3>
-     <ul id="mylist">
-      <li>Clone the repository from GitHub: git clone https://github.com/<username>/habit-tracker.git</li>
+     <ul>
+      <li>Clone the repository from GitHub: git clone https://github.com/gianniprocida/habit_tracking_app.git</li>
       <li>Navigate to the habit-tracker directory: cd habit-tracker</li>
-      <li>jo</li>
+      <li></li>
     <ul>
-  <h2>Features</h2>
-  <h3>Creating habits</h3>
+<h2>Features</h2>
+<h3>Creating habits</h3>
 
 ```
 tracker = HabitTracker("John")
