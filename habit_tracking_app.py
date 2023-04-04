@@ -1,7 +1,7 @@
 import pandas as pd
 import datetime
 import sys
-
+# So that the index will start from 1
 last_id = 0
 class Habit:
     def __init__(self,name,start,end,freq):
@@ -55,6 +55,14 @@ class HabitTracker:
         self.user = user
         self.habits = []
 
+    def addHabit(self,name,start,end,freq):
+        if self.search_by_name(name):
+            print("Already added! ")
+        else:
+            print(f"Adding {name}...")
+            self.habits.append(Habit(name,start,end,freq))
+        return 
+    
     def search_by_id(self,target_id):
         l,r = 0,len(self.habits) - 1
         while l <= r:
@@ -73,13 +81,7 @@ class HabitTracker:
         if not bool(res):
             print("Habit not found")
         return res
-    def addHabit(self,name,start,end,freq):
-        if self.search_by_name(name):
-            print("Already added! ")
-        else:
-            print(f"Adding {name}...")
-            self.habits.append(Habit(name,start,end,freq))
-        return 
+   
     def modifyHabit(self,name,start=None,end=None,freq=None):
         """TO DO"""
         if not bool(start) and not bool(end) and bool(freq):
@@ -103,6 +105,17 @@ class HabitTracker:
             return 
         else:
             print("Not found...")
+    def show_with_same_period(self):
+         #TO DO
+        print("hello")
+        pass
+    def longest_run_streak_of_all(self):
+        longest_run_streak_of_all = float('-inf')
+        for habit in self.habits:
+            if habit.completed:
+                if habit.longest_habit_streak > longest_run_streak_of_all:
+                    longest_run_streak_of_all = habit.longest_habit_streak
+        return longest_run_streak_of_all
 
 
 
@@ -110,14 +123,23 @@ if __name__=='__main__':
  
    tracker = HabitTracker("John")
    tracker.addHabit("Brush your teeth","2023-03-01","2023-03-4","D")
-   tracker.addHabit("Go to school","2023-03-02","2023-04-30","D")
+   tracker.addHabit("Go to school","2023-03-02","2023-03-05","D")
    
-   tracker.checkoff_by_name("Brush your teeth","y")
-   help(tracker.modifyHabit)
+  # tracker.checkoff_by_name("Brush your teeth","y")
+   print(tracker.search_by_id(0))
 
-  # tracker.habits[0].checkoff("y")
-  # tracker.habits[0].checkoff("y")
-  # tracker.habits[0].checkoff("y")
+   tracker.habits[0].checkoff("y")
+   tracker.habits[0].checkoff("y")
+   tracker.habits[0].checkoff("n")
+   tracker.habits[0].checkoff("y")
+   print(tracker.habits[0].checkoffList)
+
+   tracker.habits[1].checkoff("n")
+   tracker.habits[1].checkoff("y")
+   tracker.habits[1].checkoff("n")
+   tracker.habits[1].checkoff("y")
+
+   print(tracker.habits[1].checkoffList)
 
 #    tracker.addHabit("Go to school","2023-03-02","2023-04-30","D")
 #    tracker.addHabit("Study JavaScript","2023-03-02","2023-03-04","D")
