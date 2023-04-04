@@ -48,6 +48,12 @@ tracker.deleteHabit("Go to school")
 ```
 output = tracker.search_by_id(1)
 ```
+
+<h3>Searching by id</h3>
+
+```
+output = tracker.search_by_id(1)
+```
 </body>
 
 
