@@ -35,6 +35,17 @@ Look! You can see my backticks.
 Look! You can see my backticks.
 ```
 
+<h3>Searching by name</h3>
+
+```
+Look! You can see my backticks.
+```
+
+<h3>Searching by id</h3>
+
+```
+Look! You can see my backticks.
+```
 </body>
 
 
