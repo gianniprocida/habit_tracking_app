@@ -32,12 +32,14 @@ tracker.addHabit("Go to school","2023-03-02","2023-04-30","D")
 ```
 
 <h3>Deleting habits</h3>
+To delete a habit, use the delete method:
 
 ```
 tracker.deleteHabit("Go to school")
 ```
 
 <h3>Searching by name</h3>
+To search for a habit, use the search_by_name method:
 
 ```
 (myhabit,index) = tracker.search_by_name("Brush your teeth")
@@ -49,7 +51,7 @@ tracker.deleteHabit("Go to school")
 output = tracker.search_by_id(1)
 ```
 
-<h3>Searching by id</h3>
+<h3>Checking off habits</h3>
 
 ```
 output = tracker.search_by_id(1)
