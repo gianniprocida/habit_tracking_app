@@ -19,6 +19,7 @@ class Habit:
         self.completed = False
         self.longest_habit_streak = None
         self.count_of_completed_habit = None
+
     def checkoff(self,check):
         ans = 0
         if not self.completed:
@@ -34,7 +35,8 @@ class Habit:
                   j = i + 1
                   while j < len(self.checkoffList) and self.checkoffList[j] == self.checkoffList[i]=="y":
                     j+=1
-                  ans = max(ans,j-i)  
+                  ans = max(ans,j-i)        
+          print(f"Other {self.period - len(self.checkoffList)} check marks left")
         else:
               print("No need to checkoff no more...")
               print("Exit...")
@@ -43,6 +45,8 @@ class Habit:
             self.completed = True
             self.count_of_completed_habit = self.checkoffList.count("y")
             self.longest_habit_streak = ans
+            print(f"The daily habit of {self.name} was completed\
+                  within the period of {self.start} to {self.end}")
 
                  
     
@@ -65,7 +69,7 @@ class HabitTracker:
         res = None
         for index,habit in enumerate(self.habits):
             if name == habit.name:
-                res = (habit.name,index)
+                res = (habit.name,index,habit)
         if not bool(res):
             print("Habit not found")
         return res
@@ -77,6 +81,7 @@ class HabitTracker:
             self.habits.append(Habit(name,start,end,freq))
         return 
     def modifyHabit(self,name,start=None,end=None,freq=None):
+        """TO DO"""
         if not bool(start) and not bool(end) and bool(freq):
             print("Arguments all empty!")
             pass
@@ -91,35 +96,51 @@ class HabitTracker:
             [item for item in self.habits if item.name == name]
             self.habits.pop()
             return 
+    def checkoff_by_name(self,name,check):
+        (_,_,h) = self.search_by_name(name) 
+        if h:
+            h.checkoff(check)
+            return 
+        else:
+            print("Not found...")
+
+
 
 if __name__=='__main__':
  
    tracker = HabitTracker("John")
    tracker.addHabit("Brush your teeth","2023-03-01","2023-03-4","D")
-
-
    tracker.addHabit("Go to school","2023-03-02","2023-04-30","D")
-   tracker.addHabit("Study JavaScript","2023-03-02","2023-03-04","D")
-   tracker.addHabit("Study Python","2023-03-02","2023-03-04","D")
-   tracker.addHabit("Go to bed","2023-03-02","2023-03-04","D")
-   print("Before calling the delete method..")
-   for i in tracker.habits:
-       print(i.name)
+   
+   tracker.checkoff_by_name("Brush your teeth","y")
+   help(tracker.modifyHabit)
+
+  # tracker.habits[0].checkoff("y")
+  # tracker.habits[0].checkoff("y")
+  # tracker.habits[0].checkoff("y")
+
+#    tracker.addHabit("Go to school","2023-03-02","2023-04-30","D")
+#    tracker.addHabit("Study JavaScript","2023-03-02","2023-03-04","D")
+#    tracker.addHabit("Study Python","2023-03-02","2023-03-04","D")
+#    tracker.addHabit("Go to bed","2023-03-02","2023-03-04","D")
+#    print("Before calling the delete method..")
+#    for i in tracker.habits:
+#        print(i.name)
    
    
-   tracker.deleteHabit("Go to school")
-   tracker.deleteHabit("Go to bed")
-   tracker.deleteHabit("Study JavaScript")
+#    tracker.deleteHabit("Go to school")
+#    tracker.deleteHabit("Go to bed")
+#    tracker.deleteHabit("Study JavaScript")
    
-   print("See what happened after calling the delete method..")
-   for i in tracker.habits:
-       print(i.name)
+#    print("See what happened after calling the delete method..")
+#    for i in tracker.habits:
+#        print(i.name)
    
-   (a,b) = tracker.search_by_name("Brush your teeth")
-   tracker.addHabit("Go to the gym","2023-03-02","2023-03-04","D")
-   tracker.addHabit("Wash your clothes","2023-03-02","2023-03-04","D")
-   output = tracker.search_by_id(1)
-   print(output)
+#    (a,b) = tracker.search_by_name("Brush your teeth")
+#    tracker.addHabit("Go to the gym","2023-03-02","2023-03-04","D")
+#    tracker.addHabit("Wash your clothes","2023-03-02","2023-03-04","D")
+#    output = tracker.search_by_id(1)
+ 
 #    tracker.deleteHabit("Brush your teeth")
 #    tracker.deleteHabit("Study Python")
 #    tracker.deleteHabit("Go to bed")
