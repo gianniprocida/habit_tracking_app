@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<style>
+
+
+</style>
     <meta charset="UTF-8">
 </head>
 <body>
 <h1>Overview</h1>
 <hr>
-      <p>Habit tracking app that allows users to track their daily habits and 
+<p>Habit tracking app that allows users to track their daily habits and 
       monitor their progress over time. Users can create, modifiy, delete, and search habits, and check off each day
     they complete the habit</a></p>
 <h2>Getting started</h2>
 
 Before using the Habit Tracker App make sure you have Python3 installed on your computer.
-   <h3>How to run it?</h3>
-     <ul>
-      <li>hello</li>
-      <li>hello</li>
-    <li>jo</li>
+<h3>How to run it?</h3>
+     <ul id="mylist">
+      <li>Clone the repository from GitHub: git clone https://github.com/<username>/habit-tracker.git</li>
+      <li>Navigate to the habit-tracker directory: cd habit-tracker</li>
+      <li>jo</li>
     <ul>
   <h2>Features</h2>
   <h3>Creating habits</h3>
