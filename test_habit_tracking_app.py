@@ -1,7 +1,6 @@
 import unittest
 import pandas as pd
-from habit_tracking_app import Habit
-
+from habit_tracking_app import Habit,HabitTracker
 
 class Test_Habit(unittest.TestCase):
     def setUp(self):
@@ -35,6 +34,24 @@ class Test_Habit(unittest.TestCase):
         self.obj3.checkoff('y')
         streak = self.obj3.longest_habit_streak
         self.assertEqual(streak,4)
+
+class TestHabitTracker(unittest.TestCase):
+    def setUp(self):
+        self.obj1 = HabitTracker("John")
+        self.obj1.addHabit("Brush your teeth","2023-03-01","2023-03-4","D") 
+
+    def test_search_by_name(self):
+        (h,_,_) = self.obj1.search_by_name("Brush your teeth")
+        self.assertEqual(h,"Brush your teeth")
+        self.obj1.addHabit("Go to the gym","2023-03-01","2023-03-4","D") 
+        (h,_,_) = self.obj1.search_by_name("Go to the gym")
+        self.assertEqual(h,"Go to the gym")
+
+    def test_search_by_id(self):
+        self.obj1.addHabit("Go to the gym","2023-03-01","2023-03-4","D") 
+        h = self.obj1.search_by_id(2)
+        self.assertEqual(h,"Go to the gym")
+
 
 
 if __name__ == '__main__':
