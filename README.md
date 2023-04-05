@@ -54,4 +54,7 @@ tracker.checkoff_by_name("Brush your teeth","y")
 tracker.checkoff_by_name("Brush your teeth","y")
 ```
 
+<h2>Thought Process and Development of the Habit Tracking App</h2>
+
+
 </body>
