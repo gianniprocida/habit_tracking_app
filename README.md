@@ -55,6 +55,14 @@ tracker.checkoff_by_name("Brush your teeth","y")
 ```
 
 <h2>Thought Process and Development of the Habit Tracking App</h2>
-Formally, a habit is a clearly defined task that must be completed periodically (e.g., brush your teeth every day or go to the dentist once every year). The obvious object, therefore, is the <mark class="red">January 30, 2011</mark>
+Formally, a habit is a clearly defined task that must be completed periodically 
+(e.g., brush your teeth every day or go to the dentist once every year). 
+The obvious object, therefore, is the <span style="color: red;">Habit</span> object; less obvious one is 
+a <span style="color: red;">Habit Tracking</span> container object. The relationship between the 
+two classes of objects in our tracking app can be described using a UML class diagram. Here is our 
+first class diagram:
+This UML diagram provides a visual representation of the one-to-many relationship between 
+the Habit and HabitTracker classes, with one HabitTracker having zero or more Habit objects associated 
+with it. 
 
 </body>

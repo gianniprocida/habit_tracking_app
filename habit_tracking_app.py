@@ -56,52 +56,74 @@ class HabitTracker:
         self.habits = []
 
     def addHabit(self,name,start,end,freq):
-        if self.search_by_name(name):
+        """Adds a habit to the Tracker object.
+
+        Parameters:
+        name (str): The name of the habit you wish to add.
+        start (str): The date when the habit is planned to start.
+        end (str): The date when the habit is planned to start.
+        freq (str): The frequency with which the habit is planned to occur.
+        
+        Returns:
+        None
+
+        """
+        if self.get_habit_by_name(name):
             print("Already added! ")
         else:
             print(f"Adding {name}...")
             self.habits.append(Habit(name,start,end,freq))
         return 
     
-    def search_by_id(self,target_id):
+    def get_habit_by_id(self,habit_id):
+        """
+
+        Returns the Habit object and its name with the given ID.
+
+        Parameters:
+        habit_id (int): The unique identifier of the habit to retrieve.
+        
+        Returns:
+        Habit: The Habit object with the given ID.
+        """
         l,r = 0,len(self.habits) - 1
         while l <= r:
             mid = (r+l)//2
-            if target_id > self.habits[mid].id:
+            if habit_id > self.habits[mid].id:
                 l = mid + 1
-            elif target_id < self.habits[mid].id:
+            elif habit_id < self.habits[mid].id:
                 r = mid - 1
             else:
-                return self.habits[mid].name 
-    def search_by_name(self,name):
+                return self.habits[mid] 
+    def get_habit_by_name(self,name):
+        """
+
+        Returns the Habit object with the given name.
+
+        Parameters:
+        name (int): The name of the Habit you wish to retrieve.
+        
+        Returns:
+        Habit: The Habit object with the given name.
+        """
         res = None
         for index,habit in enumerate(self.habits):
             if name == habit.name:
-                res = (habit.name,index,habit)
+                res = habit
         if not bool(res):
             print("Habit not found")
         return res
    
-    def modifyHabit(self,name,start=None,end=None,freq=None):
-        """TO DO"""
-        if not bool(start) and not bool(end) and bool(freq):
-            print("Arguments all empty!")
-            pass
-        elif bool(start) and bool(end):
-            pass
-        elif bool(freq):
-            pass
-        return 
     def deleteHabit(self,name):
-        if self.search_by_name(name):
+        if self.get_habit_by_name(name):
             self.habits = [item for item in self.habits if item.name != name] +\
             [item for item in self.habits if item.name == name]
             self.habits.pop()
             return 
     def checkoff_by_name(self,name,check):
-        (_,_,h) = self.search_by_name(name) 
-        if h:
-            h.checkoff(check)
+        habit = self.get_habit_by_name(name) 
+        if self.get_habit_by_name(name):
+            habit.checkoff(check)
             return 
         else:
             print("Not found...")
