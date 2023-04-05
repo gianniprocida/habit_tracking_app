@@ -34,17 +34,17 @@ To delete a habit, use the delete method:
 tracker.deleteHabit("Go to school")
 ```
 
-<h3>Searching by name</h3>
-To search for a habit, use the search_by_name method:
+<h3>Retrieving the habit by name</h3>
+To retrieve the Habit object with the given name
 
 ```
-(myhabit,index) = tracker.search_by_name("Brush your teeth")
+myhabit = tracker.get_habit_by_name("Brush your teeth")
 ```
 
-<h3>Searching by id</h3>
+<h3>Retrieving the habit by id</h3>
 
 ```
-output = tracker.search_by_id(1)
+habit = tracker.get_habit_by_id(1)
 ```
 
 <h3>Checking off by name</h3>
