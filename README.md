@@ -55,6 +55,6 @@ tracker.checkoff_by_name("Brush your teeth","y")
 ```
 
 <h2>Thought Process and Development of the Habit Tracking App</h2>
-
+Formally, a habit is a clearly defined task that must be completed periodically (e.g., brush your teeth every day or go to the dentist once every year). The obvious object, therefore, is the <mark class="red">January 30, 2011</mark>
 
 </body>
