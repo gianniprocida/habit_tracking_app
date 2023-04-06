@@ -35,10 +35,10 @@ tracker.deleteHabit("Go to school")
 ```
 
 <h3>Retrieving the habit by name</h3>
-To retrieve the Habit object with the given name
+To retrieve the habit with the given name
 
 ```
-myhabit = tracker.get_habit_by_name("Brush your teeth")
+habit = tracker.get_habit_by_name("Brush your teeth")
 ```
 
 <h3>Retrieving the habit by id</h3>
@@ -63,6 +63,7 @@ two classes of objects in our tracking app can be described using a UML class di
 first class diagram:
 This UML diagram provides a visual representation of the one-to-many relationship between 
 the Habit and HabitTracker classes, with one HabitTracker having zero or more Habit objects associated 
-with it. 
+with it.<img src="uml_diagr.png" alt="Description of the image">
+ 
 
 </body>
