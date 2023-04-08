@@ -10,7 +10,7 @@ class Habit:
         self.start = start
         self.end = end
         self.freq = freq
-        self.period = len(pd.date_range(start=self.start, end=self.end, freq=self.freq))
+     #   self.period = len(pd.date_range(start=self.start, end=self.end, freq=self.freq))
         self.checkoffList = []
         global last_id
         last_id+=1
@@ -21,6 +21,7 @@ class Habit:
         self.count_of_completed_habit = None
 
     def checkoff(self,check):
+        length_of_period = len(pd.date_range(start=self.start, end=self.end, freq=self.freq))
         ans = 0
         if not self.completed:
           if check == "y":
@@ -36,17 +37,16 @@ class Habit:
                   while j < len(self.checkoffList) and self.checkoffList[j] == self.checkoffList[i]=="y":
                     j+=1
                   ans = max(ans,j-i)        
-          print(f"Other {self.period - len(self.checkoffList)} check marks left")
+          print(f"Other {length_of_period- len(self.checkoffList)} check marks left")
         else:
               print("No need to checkoff no more...")
               print("Exit...")
               return 
-        if len(self.checkoffList) == self.period:# and datetime.date.today() == self.end
+        if len(self.checkoffList) == length_of_period:# and datetime.date.today() == self.end
             self.completed = True
             self.count_of_completed_habit = self.checkoffList.count("y")
             self.longest_habit_streak = ans
-            print(f"The daily habit of {self.name} was completed\
-                  within the period of {self.start} to {self.end}")
+            print(f"The daily habit of {self.name} was completed within the period of {self.start} to {self.end}")
 
                  
     
@@ -69,10 +69,9 @@ class HabitTracker:
 
         """
         if self.get_habit_by_name(name):
-            print("Already added! ")
-        else:
-            print(f"Adding {name}...")
-            self.habits.append(Habit(name,start,end,freq))
+            raise Exception("Habit already added!")
+        print(f"Adding {name}...")
+        self.habits.append(Habit(name,start,end,freq))
         return 
     
     def get_habit_by_id(self,habit_id):
@@ -110,11 +109,21 @@ class HabitTracker:
         for index,habit in enumerate(self.habits):
             if name == habit.name:
                 res = habit
-        if not bool(res):
-            print("Habit not found")
+   #     if not bool(res):
+   #         print("Habit not found")
         return res
    
     def deleteHabit(self,name):
+        """
+
+        Returns the Habit object with the given name.
+
+        Parameters:
+        name (int): The name of the Habit you wish to retrieve.
+        
+        Returns:
+        Habit: The Habit object with the given name.
+        """
         if self.get_habit_by_name(name):
             self.habits = [item for item in self.habits if item.name != name] +\
             [item for item in self.habits if item.name == name]
@@ -137,8 +146,11 @@ class HabitTracker:
             if habit.completed:
                 if habit.longest_habit_streak > longest_run_streak_of_all:
                     longest_run_streak_of_all = habit.longest_habit_streak
-        return longest_run_streak_of_all
-
+                    name = habit.name
+        return {name:longest_run_streak_of_all}
+    def show_all_habits(self):
+        for habit in self.habits:
+            print(habit.name)
 
 
 if __name__=='__main__':
@@ -148,7 +160,7 @@ if __name__=='__main__':
    tracker.addHabit("Go to school","2023-03-02","2023-03-05","D")
    
   # tracker.checkoff_by_name("Brush your teeth","y")
-   print(tracker.search_by_id(0))
+   print(tracker.get_habit_by_id(0))
 
    tracker.habits[0].checkoff("y")
    tracker.habits[0].checkoff("y")
@@ -162,7 +174,13 @@ if __name__=='__main__':
    tracker.habits[1].checkoff("y")
 
    print(tracker.habits[1].checkoffList)
+   print(tracker.habits[0].longest_habit_streak)
+   print(tracker.habits[1].longest_habit_streak)
 
+   r = tracker.get_habit_by_name("Brush your tth")
+
+   a = tracker.longest_run_streak_of_all()
+   print(a)
 #    tracker.addHabit("Go to school","2023-03-02","2023-04-30","D")
 #    tracker.addHabit("Study JavaScript","2023-03-02","2023-03-04","D")
 #    tracker.addHabit("Study Python","2023-03-02","2023-03-04","D")

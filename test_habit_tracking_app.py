@@ -40,19 +40,33 @@ class TestHabitTracker(unittest.TestCase):
         self.obj1 = HabitTracker("John")
         self.obj1.addHabit("Brush your teeth","2023-03-01","2023-03-4","D") 
 
-    def test_search_by_name(self):
-        (h,_,_) = self.obj1.search_by_name("Brush your teeth")
-        self.assertEqual(h,"Brush your teeth")
+    def test_get_habit_by_name(self):
+        h = self.obj1.get_habit_by_name("Brush your teeth")
+        self.assertEqual(h.name,"Brush your teeth")
         self.obj1.addHabit("Go to the gym","2023-03-01","2023-03-4","D") 
-        (h,_,_) = self.obj1.search_by_name("Go to the gym")
-        self.assertEqual(h,"Go to the gym")
+        h = self.obj1.get_habit_by_name("Go to the gym")
+        self.assertEqual(h.name,"Go to the gym")
 
-    def test_search_by_id(self):
+    def test_get_habit_by_id(self):
         self.obj1.addHabit("Go to the gym","2023-03-01","2023-03-4","D") 
-        h = self.obj1.search_by_id(2)
-        self.assertEqual(h,"Go to the gym")
+        h = self.obj1.get_habit_by_id(2)
+        self.assertEqual(h.name,"Go to the gym")
 
+    def test_longest_run_streak_of_all(self):
+      
+        self.obj1.addHabit("Go to school","2023-03-02","2023-03-05","D")
+   
 
+        self.obj1.checkoff_by_name("Brush your teeth","y")
+        self.obj1.checkoff_by_name("Brush your teeth","y")
+        self.obj1.checkoff_by_name("Brush your teeth","y")
+        self.obj1.checkoff_by_name("Brush your teeth","n")
+
+        self.obj1.checkoff_by_name("Go to school","y")
+        self.obj1.checkoff_by_name("Go to school","n")
+        self.obj1.checkoff_by_name("Go to school","y")
+        self.obj1.checkoff_by_name("Go to school","n")
+        self.assertEqual({"Brush your teeth":3},self.obj1.longest_run_streak_of_all())
 
 if __name__ == '__main__':
     unittest.main()
