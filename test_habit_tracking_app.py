@@ -15,8 +15,8 @@ class Test_Habit(unittest.TestCase):
         self.obj1.checkoff('y')
         self.obj1.checkoff('y')
         self.obj1.checkoff('n')
-        self.obj1.checkoff('y')
-
+        self.obj1.checkoff('y') 
+        self.assertEqual(self.obj1.checkoffList,["y","y","n","y"])
         streak = self.obj1.longest_habit_streak
         self.assertEqual(streak,2)
 
@@ -25,6 +25,7 @@ class Test_Habit(unittest.TestCase):
         self.obj2.checkoff('y')
         self.obj2.checkoff('n')
         self.obj2.checkoff('y')
+        self.assertEqual(self.obj2.checkoffList,["y","n","y","n","y"])
         streak = self.obj2.longest_habit_streak
         self.assertEqual(streak,1)
 
@@ -32,41 +33,81 @@ class Test_Habit(unittest.TestCase):
         self.obj3.checkoff('y')
         self.obj3.checkoff('y')
         self.obj3.checkoff('y')
+        self.assertEqual(self.obj3.checkoffList,["y","y","y","y"])
         streak = self.obj3.longest_habit_streak
         self.assertEqual(streak,4)
 
 class TestHabitTracker(unittest.TestCase):
     def setUp(self):
-        self.obj1 = HabitTracker("John")
-        self.obj1.addHabit("Brush your teeth","2023-03-01","2023-03-4","D") 
+        self.objTracker = HabitTracker("John")
+        self.objTracker.add_habit("Brush your teeth","2023-03-01","2023-03-04","D") 
+        
 
     def test_get_habit_by_name(self):
-        h = self.obj1.get_habit_by_name("Brush your teeth")
+        h = self.objTracker.get_habit_by_name("Brush your teeth")
         self.assertEqual(h.name,"Brush your teeth")
-        self.obj1.addHabit("Go to the gym","2023-03-01","2023-03-4","D") 
-        h = self.obj1.get_habit_by_name("Go to the gym")
+        self.objTracker.add_habit("Go to the gym","2023-03-01","2023-03-04","D") 
+        h = self.objTracker.get_habit_by_name("Go to the gym")
         self.assertEqual(h.name,"Go to the gym")
 
-    def test_get_habit_by_id(self):
-        self.obj1.addHabit("Go to the gym","2023-03-01","2023-03-4","D") 
-        h = self.obj1.get_habit_by_id(2)
-        self.assertEqual(h.name,"Go to the gym")
+    # def test_checkoff_by_name(self):
+    #     self.objTracker.add_habit("Study Python","2023-03-02","2023-03-05","D")
+    #     self.objTracker.checkoff_by_name("Study Python","y")
+
+    #     self.objTracker.
+    #     self.objTracker.checkoff_by_name("Study Python","n")
+    #     self.objTracker.checkoff_by_name("Study Python","y")
+    #     self.assertEqual()
 
     def test_longest_run_streak_of_all(self):
       
-        self.obj1.addHabit("Go to school","2023-03-02","2023-03-05","D")
+        self.objTracker.add_habit("Go to school","2023-03-02","2023-03-05","D")
    
 
-        self.obj1.checkoff_by_name("Brush your teeth","y")
-        self.obj1.checkoff_by_name("Brush your teeth","y")
-        self.obj1.checkoff_by_name("Brush your teeth","y")
-        self.obj1.checkoff_by_name("Brush your teeth","n")
+        self.objTracker.checkoff_by_name("Brush your teeth","y")
+        self.objTracker.checkoff_by_name("Brush your teeth","y")
+        self.objTracker.checkoff_by_name("Brush your teeth","y")
+        self.objTracker.checkoff_by_name("Brush your teeth","n")
 
-        self.obj1.checkoff_by_name("Go to school","y")
-        self.obj1.checkoff_by_name("Go to school","n")
-        self.obj1.checkoff_by_name("Go to school","y")
-        self.obj1.checkoff_by_name("Go to school","n")
-        self.assertEqual({"Brush your teeth":3},self.obj1.longest_run_streak_of_all())
+        self.objTracker.checkoff_by_name("Go to school","y")
+        self.objTracker.checkoff_by_name("Go to school","n")
+        self.objTracker.checkoff_by_name("Go to school","y")
+        self.objTracker.checkoff_by_name("Go to school","n")
+        self.assertEqual({"Brush your teeth":3},self.objTracker.longest_run_streak_of_all())
+
+    def test_delete_habit(self):
+        self.objTracker.add_habit("Go to school","2023-03-02","2023-03-05","D")
+
+        self.objTracker.add_habit("Study SQL","2023-03-02","2023-03-05","D")
+
+        self.objTracker.delete_habit("Brush your teeth")
+
+        self.objTracker.delete_habit("Go to school")
+
+        self.objTracker.delete_habit("Study SQL")
+   
+        self.assertEqual(self.objTracker.habits,[])
+    
+    def test_get_habits_with_same_periodicity(self):
+        self.objTracker.add_habit("Go to school","2023-03-02","2023-03-25","D")
+
+        self.objTracker.add_habit("Study SQL","2023-03-01","2023-03-05","D")
+
+        self.objTracker.add_habit("Study JavaScript","2023-03-02","2023-03-05","D")
+
+        self.objTracker.add_habit("Study Python","2023-03-02","2023-03-05","D")
+
+        key_to_compare = ["2023-03-01-2023-03-04","2023-03-02-2023-03-25","2023-03-01-2023-03-05","2023-03-02-2023-03-05"]
+
+        myres = self.objTracker.get_habits_with_same_periodicity()
+
+        self.assertEqual(len(myres),4)
+
+        
+        for key in myres:
+            assert key in key_to_compare,f"The key {key} is not in the expected keys."
+
+
 
 if __name__ == '__main__':
     unittest.main()
