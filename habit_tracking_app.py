@@ -1,13 +1,29 @@
 import pandas as pd
 import datetime
 import sys
+from typing import Union
 # So that the index will start from 1
 last_id = 0
 class Habit:
-    def __init__(self,name,start,end,freq):
-        # check arguments passed in the constructor
+    """
+    Represents a Habit with a name,start,end,freq
+
+    Attributes:
+        name (str): The name of the habit you wish to create.
+        start (str): The date when the habit is planned to start.
+        end (str): The date when the habit is planned to start.
+        freq (str): The frequency with which the habit is planned to occur.
+
+     Methods:
+    __init__(self, name: str,start:str,end:str,freq:str) -> None
+        Initializes a Habit object with the given name, starting date,end date and frequency.
+    """
+     
+    def __init__(self,name,start,end,freq:Union["D","W"]):
+        if not isinstance(name,str):
+            raise TypeError(f"{name} must be a string")
         if not isinstance(start,str):
-            raise TypeError("start must be a string")
+            raise TypeError(f"{start} must be a string")
             # convert the date string to a date object
         date_object = datetime.datetime.strptime(start, '%Y-%m-%d').date()
         start = date_object.strftime('%Y-%m-%d')
@@ -15,23 +31,44 @@ class Habit:
             raise TypeError("end must be a string")
         date_object = datetime.datetime.strptime(end, '%Y-%m-%d').date()
         end = date_object.strftime('%Y-%m-%d')
+
+        if freq not in ["D","W"]:
+            raise ValueError(f"Invalid argument {freq}. Expected 'D' or 'W'.")
+
         self.time_period_string = f"{start}-{end}"
         self.name = name
         self.start = start
         self.end = end
         self.freq = freq
-     #   self.period = len(pd.date_range(start=self.start, end=self.end, freq=self.freq))
         self.checkoffList = []
         global last_id
         last_id+=1
         self.id = last_id
-        self.creation_date = datetime.date.today()
-      
+        self.creation_date = datetime.date.today()   
         self.completed = False
         self.longest_habit_streak = None
         self.count_of_completed_habit = None
 
-    def checkoff(self,check):
+    def checkoff(self,check: Union["y","n"]):
+        """Perform operations on the properties of the habit class.
+        Adds "y" or "n" to the checkoffList property of the class, 
+        Keeps track of the number of consecutive 'y' in the checkoffList (longest_habit_streak)
+        Keeps track of the number of 'y' in the checkoffList (count_of_completed_habit)
+        Sets completed to True If the checkoffList property of the class has reached a length equal to the given period.
+
+        Args:
+        check (Union["foo", "bar"]): The 'check' argument should be either "y" (yes) or "n" (no)
+        indicating whether the habit has been completed or not.
+        
+        Returns:
+        This function does not return anything
+
+        Raises:
+          Values error: If the 'check' argument is not "y" or "n".
+
+        """
+
+
         length_of_period = len(pd.date_range(start=self.start, end=self.end, freq=self.freq))
         ans = 0
         if not self.completed:
@@ -40,7 +77,7 @@ class Habit:
           elif check =="n":
              self.checkoffList.append("n")
           else:
-             raise TypeError("Invalid input")
+             raise ValueError(f"Invalid argument {check}. Expected 'y' or 'n'.")
           if len(self.checkoffList) > 1 and "y" in self.checkoffList:
               ans = 1
               for i in range(len(self.checkoffList)):
@@ -62,6 +99,18 @@ class Habit:
                  
     
 class HabitTracker:
+    """
+    Represents a HabitTracker with a user name and list of habits.
+
+    Attributes:
+        user (str): The name of the user
+        habits (lst): List of habits to be processed 
+
+    Methods:
+    __init__(self, user: str) -> None
+        Initializes a HabitTracker object with the given user.
+    """
+     
     def __init__(self,user):
         self.user = user
         self.habits = []
@@ -69,28 +118,31 @@ class HabitTracker:
     def add_habit(self,name,start,end,freq):
         """Adds a habit to the Tracker object.
 
-        Parameters:
+        Args:
         name (str): The name of the habit you wish to add.
         start (str): The date when the habit is planned to start.
         end (str): The date when the habit is planned to start.
         freq (str): The frequency with which the habit is planned to occur.
         
         Returns:
-        None
+        This function does not return anything
+
+        Raises:
+          Habit already added: If the habit name was already added.
 
         """
         if self.get_habit_by_name(name):
             raise Exception("Habit already added!")
         print(f"Adding {name}...")
-        self.habits.append(Habit(name,start,end,freq))
-        return 
+        self.habits.append(Habit(name,start,end,freq)) 
     
     def get_habit_by_id(self,habit_id):
         """
 
-        Returns the Habit object and its name with the given ID.
+        Returns the Habit object and its name with th
+         given ID.
 
-        Parameters:
+        Args:
         habit_id (int): The unique identifier of the habit to retrieve.
         
         Returns:
@@ -127,31 +179,86 @@ class HabitTracker:
 
         Returns the Habit object with the given name.
 
-        Parameters:
+        Args:
         name (int): The name of the Habit you wish to retrieve.
         
         Returns:
         Habit: The Habit object with the given name.
         """
-        if self.get_habit_by_name(name):
-            self.habits = [item for item in self.habits if item.name != name] +\
-            [item for item in self.habits if item.name == name]
-            self.habits.pop()
-    def checkoff_by_name(self,name,check):
+        if not self.get_habit_by_name(name):
+            raise Exception(f"Error: the habit {name} is not in the HabitTracker!")
+        self.habits = [item for item in self.habits if item.name != name] +\
+        [item for item in self.habits if item.name == name]
+        self.habits.pop()
+    def checkoff_by_name(self,name,check: Union["y","n"]):
+        """
+        
+        Checks off a habit in the habit list with the given name
+        
+        Args:
+        name (str): The name of the habit to check off.
+        check  (Union["foo", "bar"]): The 'check' argument should be either "y" (yes) or "n" (no)
+        indicating whether the habit has been completed or not.
+        
+        Returns:
+        This function does not return anything.
+
+        Raises:
+          Habit not found: If the habit name is not found in the habits list.
+        
+        Raises:
+          ValueError: If the 'check' argument is not "y" or "n". 
+        """
+
         habit = self.get_habit_by_name(name) 
         if not self.get_habit_by_name(name):
             raise Exception("Habit not found")
+        if check not in ["y","n"]:
+            raise ValueError(f"Invalid argument {check}. Expected 'y' or 'n'.")
         habit.checkoff(check)
-    def get_habits_with_same_periodicity(self):
+    def get_habits_with_same_property(self,myprop:Union["time_period_string","freq"]):
+        """Group habits by property
+        
+        Returns a dictionary with property key and lists of the name of the habit objects that share 
+        the same property key.
+         
+        Args:
+        myprop (str): The name of the property by which you wish to group 
+        your habits.  The myprop argument should be either "time_period_string" or "freq". 
+        
+        Returns:
+        Dict[str, List[name]]: A dictionary with subject keys and lists of the name habit objects.
+
+
+        Raises:
+          Habit not found: If the habit name is not found in the habits list.
+        
+        Raises:
+          ValueError: If the argument is not "y" or "n". 
+        """
+        
+        if myprop not in ["time_period_string","freq"]:
+            raise ValueError(f"Invalid argument {myprop}. Expected 'time_period_string' or 'freq'.")
         res = {}
         for habit in self.habits:
-            mykey = getattr(habit,"time_period_string")
+            mykey = getattr(habit,myprop)
             if mykey not in res:
-                res[mykey] = [habit]
+                res[mykey] = [habit.name]
             else:
-                res[mykey].append(habit)
+                res[mykey].append(habit.name)
         return res
-    def longest_run_streak_of_all(self):
+    def get_longest_run_streak_of_all(self):
+        """
+        
+        Returns a dictionary with the key as the habit name and value as the longest run streak 
+        of all habits.
+         
+    
+        Returns:
+        Dict[str, int]: A dictionary with the key as the habit name and value as the longest run streak 
+        of all habits.
+
+        """
         longest_run_streak_of_all = float('-inf')
         for habit in self.habits:
             if habit.completed:
@@ -191,8 +298,8 @@ if __name__=='__main__':
    tracker.add_habit("Study Python","2023-03-04","2023-03-10","D")
 
    tracker.add_habit("Study JavaScript","2023-03-04","2023-03-10","D")
-   o = tracker.get_habits_with_same_periodicity()
-   print(o)
+   tracker.delete_habit("Study")
+   tracker.show_all_habits()
 #    d = {}
 #    for i in tracker.habits:
 #        mykey = getattr(i,"time_period_string")

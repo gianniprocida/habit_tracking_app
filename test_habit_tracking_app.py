@@ -60,10 +60,7 @@ class TestHabitTracker(unittest.TestCase):
     #     self.assertEqual()
 
     def test_longest_run_streak_of_all(self):
-      
         self.objTracker.add_habit("Go to school","2023-03-02","2023-03-05","D")
-   
-
         self.objTracker.checkoff_by_name("Brush your teeth","y")
         self.objTracker.checkoff_by_name("Brush your teeth","y")
         self.objTracker.checkoff_by_name("Brush your teeth","y")
@@ -73,22 +70,17 @@ class TestHabitTracker(unittest.TestCase):
         self.objTracker.checkoff_by_name("Go to school","n")
         self.objTracker.checkoff_by_name("Go to school","y")
         self.objTracker.checkoff_by_name("Go to school","n")
-        self.assertEqual({"Brush your teeth":3},self.objTracker.longest_run_streak_of_all())
+        self.assertEqual({"Brush your teeth":3},self.objTracker.get_longest_run_streak_of_all())
 
     def test_delete_habit(self):
         self.objTracker.add_habit("Go to school","2023-03-02","2023-03-05","D")
-
         self.objTracker.add_habit("Study SQL","2023-03-02","2023-03-05","D")
-
         self.objTracker.delete_habit("Brush your teeth")
-
         self.objTracker.delete_habit("Go to school")
-
         self.objTracker.delete_habit("Study SQL")
-   
         self.assertEqual(self.objTracker.habits,[])
     
-    def test_get_habits_with_same_periodicity(self):
+    def test_get_habits_with_same_property(self):
         self.objTracker.add_habit("Go to school","2023-03-02","2023-03-25","D")
 
         self.objTracker.add_habit("Study SQL","2023-03-01","2023-03-05","D")
@@ -99,13 +91,19 @@ class TestHabitTracker(unittest.TestCase):
 
         key_to_compare = ["2023-03-01-2023-03-04","2023-03-02-2023-03-25","2023-03-01-2023-03-05","2023-03-02-2023-03-05"]
 
-        myres = self.objTracker.get_habits_with_same_periodicity()
+        myres = self.objTracker.get_habits_with_same_property("time_period_string")
 
         self.assertEqual(len(myres),4)
 
         
         for key in myres:
             assert key in key_to_compare,f"The key {key} is not in the expected keys."
+
+        max_key = max(myres,key = lambda x : len(myres[x]))
+
+        self.assertEqual(max_key,"2023-03-02-2023-03-05")
+
+        self.assertEqual(set(myres[max_key]),set(["Study JavaScript","Study Python"]))
 
 
 
