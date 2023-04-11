@@ -177,13 +177,13 @@ class HabitTracker:
     def delete_habit(self,name):
         """
 
-        Returns the Habit object with the given name.
+        Delete the Habit object with the given name.
 
         Args:
-        name (int): The name of the Habit you wish to retrieve.
+        name (int): The name of the Habit you wish to delete.
         
         Returns:
-        Habit: The Habit object with the given name.
+        This function does not return anything
         """
         if not self.get_habit_by_name(name):
             raise Exception(f"Error: the habit {name} is not in the HabitTracker!")
@@ -233,8 +233,6 @@ class HabitTracker:
         Raises:
           Habit not found: If the habit name is not found in the habits list.
         
-        Raises:
-          ValueError: If the argument is not "y" or "n". 
         """
         
         if myprop not in ["time_period_string","freq"]:
@@ -247,7 +245,7 @@ class HabitTracker:
             else:
                 res[mykey].append(habit.name)
         return res
-    def get_longest_run_streak_of_all(self):
+    def get_habit_with_longest_run_streak_of_all(self):
         """
         
         Returns a dictionary with the key as the habit name and value as the longest run streak 
@@ -266,9 +264,6 @@ class HabitTracker:
                     longest_run_streak_of_all = habit.longest_habit_streak
                     name = habit.name
         return {name:longest_run_streak_of_all}
-    def show_all_habits(self):
-        for habit in self.habits:
-            print(habit.name)
 
 
 if __name__=='__main__':
@@ -298,8 +293,8 @@ if __name__=='__main__':
    tracker.add_habit("Study Python","2023-03-04","2023-03-10","D")
 
    tracker.add_habit("Study JavaScript","2023-03-04","2023-03-10","D")
-   tracker.delete_habit("Study")
-   tracker.show_all_habits()
+   out = tracker.get_habit_with_longest_run_streak_of_all()
+   o = tracker.get_habits_with_same_property("time_period_string")
 #    d = {}
 #    for i in tracker.habits:
 #        mykey = getattr(i,"time_period_string")
@@ -307,31 +302,11 @@ if __name__=='__main__':
 #            d[mykey].append(i)
 #        else:
 #            d[mykey] = [i]
-
+   print("Longest run: {0}\nHabit:{1}".format(list(out.keys())[0],list(out.values())[0]))
 #    print(d)
 #    a = tracker.longest_run_streak_of_all()
 #    print(a)
      
-   out = getattr(tracker,"user") 
 #    tracker.deleteHabit("Go to school")
 #    tracker.deleteHabit("Go to bed")
 #    tracker.deleteHabit("Study JavaScript")
-   
-#    print("See what happened after calling the delete method..")
-#    for i in tracker.habits:
-#        print(i.name)
-   
-#    (a,b) = tracker.search_by_name("Brush your teeth")
-#    tracker.addHabit("Go to the gym","2023-03-02","2023-03-04","D")
-#    tracker.addHabit("Wash your clothes","2023-03-02","2023-03-04","D")
-#    output = tracker.search_by_id(1)
- 
-#    tracker.deleteHabit("Brush your teeth")
-#    tracker.deleteHabit("Study Python")
-#    tracker.deleteHabit("Go to bed")
-
-#    tracker.habits[0].checkoff('y')
-#    tracker.habits[0].checkoff('y')
-#    tracker.addHabit("Go to the gym","2023-03-02","2023-03-04","D")
-
-#    print(tracker.search_by_id(32))
