@@ -1,6 +1,5 @@
 from habit_tracking_app import Habit,HabitTracker
-import sys
-
+import sys,json
 
 
 class Menu:
@@ -71,7 +70,7 @@ class Menu:
         habit = self.tracker.get_habit_by_id(val)
         self.show(habit)
     def checkoff(self):
-        val1,val2 = input("Enter the habit you completed and 'y' or 'n' to indicate whether the task was completed. Enter the two values separed by space: ").split()
+        val1,val2 = input("Enter the habit you completed and 'y' or 'n' to indicate whether the task was completed today. Enter the two values separed by space: ").split()
         self.tracker.checkoff_by_name(val1,val2)
     def show_habit_with_longest_run_streak_of_all(self):
         habit = self.tracker.get_habit_with_longest_run_streak_of_all()
@@ -84,8 +83,17 @@ class Menu:
         habit = self.tracker.get_habits_with_same_property(val)
         self.show(habit)
     def quit(self):
-        print("Thank your for using our App today")
+        """
 
+        Quits the execution an writes the instance of the class HabitTracker to a 
+        JSON file.
+        
+        """
+
+        print("Thank your for using our App today")
+        d = self.tracker.to_dict()
+        with open("mydata.json","w") as out:
+            json.dump(d,out)
         sys.exit(0)
 if __name__=="__main__":
     Menu().run()

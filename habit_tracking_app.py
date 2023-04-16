@@ -2,6 +2,7 @@ import pandas as pd
 import datetime
 import sys
 from typing import Union
+#from other_fun import *
 # So that the index will start from 1
 last_id = 0
 class Habit:
@@ -43,8 +44,7 @@ class Habit:
         self.checkoffList = []
         global last_id
         last_id+=1
-        self.id = last_id
-        self.creation_date = datetime.date.today()   
+        self.id = last_id   
         self.completed = False
         self.longest_habit_streak = None
         self.count_of_completed_habit = None
@@ -67,9 +67,11 @@ class Habit:
           Values error: If the 'check' argument is not "y" or "n".
 
         """
-
-
-        length_of_period = len(pd.date_range(start=self.start, end=self.end, freq=self.freq))
+        start_date_object = datetime.datetime.strptime(self.start, '%Y-%m-%d').date()
+        end_date_object = datetime.datetime.strptime(self.end, '%Y-%m-%d').date()
+        length_of_period = len(pd.date_range(start=start_date_object, end=end_date_object, freq=self.freq)) if self.freq == "D" \
+            else len(pd.date_range(start=start_date_object, end=end_date_object, freq=f"{self.freq}-" + start_date_object.strftime('%a').upper()))
+        #length_of_period = len(pd.date_range(start=self.start, end=self.end, freq=self.freq))
         ans = 0
         if not self.completed:
           if check == "y":
@@ -95,6 +97,35 @@ class Habit:
             self.count_of_completed_habit = self.checkoffList.count("y")
             self.longest_habit_streak = ans
             print(f"The daily habit of {self.name} was completed within the period of {self.start} to {self.end}")
+        
+    def to_dict(self):
+        """
+
+        Returns a dictionary representation of the Habit object.
+        
+        Returns:
+        A dictionary containing the Habits object's data.
+        """
+
+        return {'name':self.name,'time_period_string':self.time_period_string,'checkoffList':self.checkoffList,'completed':self.completed}
+    
+    def print_dates_left(self):
+        """
+        Prints the days left for a habit to complete within a given period.
+
+        Returns:
+        This function does not return anything.
+
+        """
+
+        start_date_object = datetime.datetime.strptime(self.start, '%Y-%m-%d').date()
+        end_date_object = datetime.datetime.strptime(self.end, '%Y-%m-%d').date()
+        date_list = pd.date_range(start=start_date_object, end=end_date_object, freq=self.freq) if self.freq == "D" \
+            else pd.date_range(start=start_date_object, end=end_date_object, freq=f"{self.freq}-" + start_date_object.strftime('%a').upper())
+        df = pd.DataFrame(date_list[len(self.checkoffList):],columns=["Date"])
+        print(df)
+        
+
 
                  
     
@@ -131,10 +162,19 @@ class HabitTracker:
           Habit already added: If the habit name was already added.
 
         """
+
         if self.get_habit_by_name(name):
-            raise Exception("Habit already added!")
-        print(f"Adding {name}...")
-        self.habits.append(Habit(name,start,end,freq)) 
+            print("Habit already added")
+        else:
+            print(f"Adding {name}...")
+            self.habits.append(Habit(name,start,end,freq))
+
+    def get_dates_by_name(self,name):
+        habit = self.get_habit_by_name(name) 
+        if not self.get_habit_by_name(name):
+            pass
+        else:
+            habit.print_dates()
     
     def get_habit_by_id(self,habit_id):
         """
@@ -148,6 +188,7 @@ class HabitTracker:
         Returns:
         Habit: The Habit object with the given ID.
         """
+
         l,r = 0,len(self.habits) - 1
         while l <= r:
             mid = (r+l)//2
@@ -168,10 +209,13 @@ class HabitTracker:
         Returns:
         Habit: The Habit object with the given name.
         """
+
         res = None
         for index,habit in enumerate(self.habits):
             if name == habit.name:
                 res = habit
+        if not res:
+            print("Habit not found")
         return res
    
     def delete_habit(self,name):
@@ -185,11 +229,14 @@ class HabitTracker:
         Returns:
         This function does not return anything
         """
+
         if not self.get_habit_by_name(name):
-            raise Exception(f"Error: the habit {name} is not in the HabitTracker!")
-        self.habits = [item for item in self.habits if item.name != name] +\
-        [item for item in self.habits if item.name == name]
-        self.habits.pop()
+            print(f"Error: the habit {name} is not in the HabitTracker!")
+        else:
+            self.habits = [item for item in self.habits if item.name != name] +\
+            [item for item in self.habits if item.name == name]
+            self.habits.pop()
+            print(f"{name} deleted")
     def checkoff_by_name(self,name,check: Union["y","n"]):
         """
         
@@ -212,9 +259,9 @@ class HabitTracker:
 
         habit = self.get_habit_by_name(name) 
         if not self.get_habit_by_name(name):
-            raise Exception("Habit not found")
+            print("Habit not found")
         if check not in ["y","n"]:
-            raise ValueError(f"Invalid argument {check}. Expected 'y' or 'n'.")
+            print(f"Invalid argument {check}. Expected 'y' or 'n'.")
         habit.checkoff(check)
     def get_habits_with_same_property(self,myprop:Union["time_period_string","freq"]):
         """Group habits by property
@@ -236,14 +283,15 @@ class HabitTracker:
         """
         
         if myprop not in ["time_period_string","freq"]:
-            raise ValueError(f"Invalid argument {myprop}. Expected 'time_period_string' or 'freq'.")
-        res = {}
-        for habit in self.habits:
-            mykey = getattr(habit,myprop)
-            if mykey not in res:
-                res[mykey] = [habit.name]
-            else:
-                res[mykey].append(habit.name)
+            print(f"Invalid argument {myprop}. Expected 'time_period_string' or 'freq'.")
+        else:
+            res = {}
+            for habit in self.habits:
+              mykey = getattr(habit,myprop)
+              if mykey not in res:
+                 res[mykey] = [habit.name]
+              else:
+                 res[mykey].append(habit.name)
         return res
     def get_habit_with_longest_run_streak_of_all(self):
         """
@@ -257,6 +305,7 @@ class HabitTracker:
         of all habits.
 
         """
+
         longest_run_streak_of_all = float('-inf')
         for habit in self.habits:
             if habit.completed:
@@ -264,37 +313,76 @@ class HabitTracker:
                     longest_run_streak_of_all = habit.longest_habit_streak
                     name = habit.name
         return {name:longest_run_streak_of_all}
-
+    def to_dict(self):
+        return {'habits':[habit.to_dict() for habit in self.habits]}
 
 if __name__=='__main__':
- 
-   tracker = HabitTracker("John")
-   tracker.add_habit("Brush your teeth","2023-03-01","2023-03-4","D")
-   tracker.add_habit("Go to school","2023-03-02","2023-03-05","D")
+   work = Habit("Brush your teeth","2023-03-01","2023-03-28","D")
+   go = Habit("Go to school","2023-03-01","2023-03-28","D")
+
+   go.print_dates_left()
+   work.print_dates_left()
+
+   generate_alternated_items(work,8)
+
+   generate_sequence_one_item(work,10,"y")
    
-   tracker.habits[0].checkoff("y")
-   tracker.habits[0].checkoff("y")
-   tracker.habits[0].checkoff("n")
-   tracker.habits[0].checkoff("y")
-   print(tracker.habits[0].checkoffList)
+   generate_sequence_one_item(work,10,"n")
 
-   tracker.habits[1].checkoff("n")
-   tracker.habits[1].checkoff("y")
-   tracker.habits[1].checkoff("n")
-   tracker.habits[1].checkoff("y")
+   excepted = ['y', 'n', 'y', 'n', 'y', 'n', 'y', 'n','y','y','y','y',\
+               'y','y','y','y','y','y','n','n','n','n','n','n','n','n',\
+               'n','n']
+      
+   assert work.checkoffList == excepted
 
-   print(tracker.habits[1].checkoffList)
-   print(tracker.habits[0].longest_habit_streak)
-   print(tracker.habits[1].longest_habit_streak)
-   print(tracker.get_habit_by_id(1).name)
-   print(tracker.get_habit_by_id(2).name)
-   r = tracker.get_habit_by_name("Brush your tth")
 
-   tracker.add_habit("Study Python","2023-03-04","2023-03-10","D")
+   
 
-   tracker.add_habit("Study JavaScript","2023-03-04","2023-03-10","D")
-   out = tracker.get_habit_with_longest_run_streak_of_all()
-   o = tracker.get_habits_with_same_property("time_period_string")
+
+
+
+#    generate_alternated_items(go,5)
+#    generate_sequence_one_item(go,5,"n")
+ 
+        
+#    tracker = HabitTracker("John")
+#    tracker.add_habit("Brush your teeth","2023-03-01","2023-03-4","D")
+#    tracker.add_habit("Go to school","2023-03-02","2023-03-07","D")
+
+#    generate_sequence_one_item(tracker,"Brush your teeth",4,"y")
+
+   
+#    generate_alternated_items(tracker,"Go to school",3)
+#    print(tracker.get_habit_by_name("Go to school").checkoffList)
+  # generate_sequence_one_item(tracker,"Go to school",3,"y")
+
+
+
+
+   
+   
+#    tracker.habits[0].checkoff("y")
+#    tracker.habits[0].checkoff("y")
+#    tracker.habits[0].checkoff("n")
+#    tracker.habits[0].checkoff("y")
+
+#    tracker.habits[1].checkoff("n")
+#    tracker.habits[1].checkoff("y")
+#    tracker.habits[1].checkoff("n")
+#    tracker.habits[1].checkoff("y")
+
+#    print(tracker.habits[1].checkoffList)
+#    print(tracker.habits[0].longest_habit_streak)
+#    print(tracker.habits[1].longest_habit_streak)
+#    print(tracker.get_habit_by_id(1).name)
+#    print(tracker.get_habit_by_id(2).name)
+#    r = tracker.get_habit_by_name("Brush your tth")
+
+#    tracker.add_habit("Study Python","2023-03-04","2023-03-10","D")
+
+#    tracker.add_habit("Study JavaScript","2023-03-04","2023-03-10","D")
+#    out = tracker.get_habit_with_longest_run_streak_of_all()
+#    o = tracker.get_habits_with_same_property("time_period_string")
 #    d = {}
 #    for i in tracker.habits:
 #        mykey = getattr(i,"time_period_string")
@@ -302,8 +390,12 @@ if __name__=='__main__':
 #            d[mykey].append(i)
 #        else:
 #            d[mykey] = [i]
-   print("Longest run: {0}\nHabit:{1}".format(list(out.keys())[0],list(out.values())[0]))
-#    print(d)
+#    tracker.add_habit("Study SQL","2023-03-04","2023-03-30","W")
+
+#    tracker.add_habit("Study git","2023-03-04","2023-04-15","W")
+#    git = tracker.get_habit_by_name("Study git")
+
+#    a = git.print_dates()
 #    a = tracker.longest_run_streak_of_all()
 #    print(a)
      
