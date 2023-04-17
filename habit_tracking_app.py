@@ -57,8 +57,8 @@ class Habit:
         Sets completed to True If the checkoffList property of the class has reached a length equal to the given period.
 
         Args:
-        check (Union["foo", "bar"]): The 'check' argument should be either "y" (yes) or "n" (no)
-        indicating whether the habit has been completed or not.
+        check (Union["y", "n"]): The 'check' argument should be either "y" (yes) or "n" (no)
+        indicating whether the habit has been completed or not in the current day
         
         Returns:
         This function does not return anything
@@ -167,14 +167,15 @@ class HabitTracker:
             print("Habit already added")
         else:
             print(f"Adding {name}...")
-            self.habits.append(Habit(name,start,end,freq))
+            self.habits.append(Habit(name,start,end,freq))   
+ 
 
     def get_dates_by_name(self,name):
         habit = self.get_habit_by_name(name) 
         if not self.get_habit_by_name(name):
             pass
         else:
-            habit.print_dates()
+            habit.print_dates_left()
     
     def get_habit_by_id(self,habit_id):
         """
@@ -317,88 +318,51 @@ class HabitTracker:
         return {'habits':[habit.to_dict() for habit in self.habits]}
 
 if __name__=='__main__':
-   work = Habit("Brush your teeth","2023-03-01","2023-03-28","D")
-   go = Habit("Go to school","2023-03-01","2023-03-28","D")
-
-   go.print_dates_left()
-   work.print_dates_left()
-
-   generate_alternated_items(work,8)
-
-   generate_sequence_one_item(work,10,"y")
-   
-   generate_sequence_one_item(work,10,"n")
-
-   excepted = ['y', 'n', 'y', 'n', 'y', 'n', 'y', 'n','y','y','y','y',\
-               'y','y','y','y','y','y','n','n','n','n','n','n','n','n',\
-               'n','n']
-      
-   assert work.checkoffList == excepted
 
 
-   
-
-
-
-
-#    generate_alternated_items(go,5)
-#    generate_sequence_one_item(go,5,"n")
- 
         
-#    tracker = HabitTracker("John")
-#    tracker.add_habit("Brush your teeth","2023-03-01","2023-03-4","D")
-#    tracker.add_habit("Go to school","2023-03-02","2023-03-07","D")
+    tracker = HabitTracker("John")
+    tracker.add_habit("Study SQL","2023-04-01","2023-04-22","W")
+    tracker.add_habit("Study Python","2023-04-01","2023-04-22","W")
+    tracker.add_habit("Study OOP","2023-05-01","2023-05-22","W")
 
-#    generate_sequence_one_item(tracker,"Brush your teeth",4,"y")
+    # Prints out {'Study SQL':3}
+    myhabit = tracker.get_habit_by_id(1)
+    print(myhabit.name)
 
-   
-#    generate_alternated_items(tracker,"Go to school",3)
-#    print(tracker.get_habit_by_name("Go to school").checkoffList)
-  # generate_sequence_one_item(tracker,"Go to school",3,"y")
+    myhabit = tracker.get_habit_by_name("Study Python")
+
+    print(myhabit.name)
+
+    myhabit = tracker.get_habit_with_longest_run_streak_of_all
+    
+    tracker.get_dates_by_name("Study Python")
+
+    tracker.checkoff_by_name("Study Python","n")
+    tracker.checkoff_by_name("Study Python","y")
+    tracker.checkoff_by_name("Study Python","y")
+    tracker.checkoff_by_name("Study Python","y")
 
 
+    tracker.checkoff_by_name("Study SQL","n")
+    tracker.checkoff_by_name("Study SQL","n")
+    tracker.checkoff_by_name("Study SQL","y")
+    tracker.checkoff_by_name("Study SQL","y")
+
+  
+    tracker.checkoff_by_name("Study OOP","n")
+    tracker.checkoff_by_name("Study OOP","n")
+    tracker.checkoff_by_name("Study OOP","y")
+    tracker.checkoff_by_name("Study OOP","n")
+    
+    # Prints out {'Study Python':3}
+    print(tracker.get_habit_with_longest_run_streak_of_all())
+
+    # Prints out {'W':['Study SQL','Study Python','Study OOP']}
+    print(tracker.get_habits_with_same_property("freq"))
 
 
-   
-   
-#    tracker.habits[0].checkoff("y")
-#    tracker.habits[0].checkoff("y")
-#    tracker.habits[0].checkoff("n")
-#    tracker.habits[0].checkoff("y")
+    #{'2023-04-01-2023-04-22': ['Study SQL', 'Study Python'], '2023-05-01-2023-05-22': ['Study OOP']}
+    print(tracker.get_habits_with_same_property("time_period_string"))
 
-#    tracker.habits[1].checkoff("n")
-#    tracker.habits[1].checkoff("y")
-#    tracker.habits[1].checkoff("n")
-#    tracker.habits[1].checkoff("y")
-
-#    print(tracker.habits[1].checkoffList)
-#    print(tracker.habits[0].longest_habit_streak)
-#    print(tracker.habits[1].longest_habit_streak)
-#    print(tracker.get_habit_by_id(1).name)
-#    print(tracker.get_habit_by_id(2).name)
-#    r = tracker.get_habit_by_name("Brush your tth")
-
-#    tracker.add_habit("Study Python","2023-03-04","2023-03-10","D")
-
-#    tracker.add_habit("Study JavaScript","2023-03-04","2023-03-10","D")
-#    out = tracker.get_habit_with_longest_run_streak_of_all()
-#    o = tracker.get_habits_with_same_property("time_period_string")
-#    d = {}
-#    for i in tracker.habits:
-#        mykey = getattr(i,"time_period_string")
-#        if mykey in d:
-#            d[mykey].append(i)
-#        else:
-#            d[mykey] = [i]
-#    tracker.add_habit("Study SQL","2023-03-04","2023-03-30","W")
-
-#    tracker.add_habit("Study git","2023-03-04","2023-04-15","W")
-#    git = tracker.get_habit_by_name("Study git")
-
-#    a = git.print_dates()
-#    a = tracker.longest_run_streak_of_all()
-#    print(a)
-     
-#    tracker.deleteHabit("Go to school")
-#    tracker.deleteHabit("Go to bed")
-#    tracker.deleteHabit("Study JavaScript")
+    
