@@ -69,6 +69,7 @@ The obvious object, therefore, is the <span style="color: red;">Habit</span> obj
 a <span style="color: red;">Habit Tracker</span> container object. The relationship between the 
 two classes of objects in our tracking app can be described using a UML class diagram. Here is our 
 first class diagram:
+<img src="uml_diagr.png" alt="Description of the image">
 This UML diagram provides a visual representation of the one-to-many relationship between 
 the Habit and HabitTracker classes, with one HabitTracker having zero or more Habit objects associated 
 with it. 
