@@ -19,32 +19,33 @@ Before using the Habit Tracker App make sure you have Python3 installed on your 
       <li></li>
     <ul>
 <h2>Features</h2>
-<h3>Creating habits</h3>
+<h3>Create new habits</h3>
+asdaasda
 
 ```
 tracker = HabitTracker("John")
-tracker.addHabit("Brush your teeth","2023-03-01","2023-03-4","D")
-tracker.addHabit("Go to school","2023-03-02","2023-04-30","D")
+tracker.addHabit("Brush your teeth","2023-04-01","2023-04-28","D")
+tracker.addHabit("Study Python","2023-04-01","2023-04-28","D")
 ```
 
 <h3>Deleting habits</h3>
 To delete a habit, use the delete method:
 
 ```
-tracker.deleteHabit("Go to school")
+tracker.delete_habit("Study Python")
 ```
 
-<h3>Retrieving the habit by name</h3>
-To retrieve the habit with the given name
+<h3>Get habit by name</h3>
+To search for a habit, use the get_habit_by_name method:
 
 ```
-habit = tracker.get_habit_by_name("Brush your teeth")
+myhabit = tracker.get_habit_by_name("Brush your teeth")
 ```
 
-<h3>Retrieving the habit by id</h3>
+<h3>Get habit by id</h3>
 
 ```
-habit = tracker.get_habit_by_id(1)
+myhabit = tracker.get_habit_by_id(1)
 ```
 
 <h3>Checking off by name</h3>
@@ -63,7 +64,6 @@ two classes of objects in our tracking app can be described using a UML class di
 first class diagram:
 This UML diagram provides a visual representation of the one-to-many relationship between 
 the Habit and HabitTracker classes, with one HabitTracker having zero or more Habit objects associated 
-with it.<img src="uml_diagr.png" alt="Description of the image">
- 
+with it. 
 
 </body>
