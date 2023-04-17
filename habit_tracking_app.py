@@ -25,13 +25,9 @@ class Habit:
             raise TypeError(f"{name} must be a string")
         if not isinstance(start,str):
             raise TypeError(f"{start} must be a string")
-            # convert the date string to a date object
-        date_object = datetime.datetime.strptime(start, '%Y-%m-%d').date()
-        start = date_object.strftime('%Y-%m-%d')
+      
         if not isinstance(end,str):
             raise TypeError("end must be a string")
-        date_object = datetime.datetime.strptime(end, '%Y-%m-%d').date()
-        end = date_object.strftime('%Y-%m-%d')
 
         if freq not in ["D","W"]:
             raise ValueError(f"Invalid argument {freq}. Expected 'D' or 'W'.")
@@ -92,7 +88,7 @@ class Habit:
               print("No need to checkoff no more...")
               print("Exit...")
               return 
-        if len(self.checkoffList) == length_of_period:# and datetime.date.today() == self.end
+        if len(self.checkoffList) == length_of_period:
             self.completed = True
             self.count_of_completed_habit = self.checkoffList.count("y")
             self.longest_habit_streak = ans
