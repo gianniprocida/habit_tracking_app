@@ -15,8 +15,10 @@ Before using the Habit Tracker App make sure you have Python3 installed on your 
 <h3>How to run it?</h3>
      <ul>
       <li>Clone the repository from GitHub: git clone https://github.com/gianniprocida/habit_tracking_app.git</li>
-      <li>Navigate to the habit-tracker directory: cd habit-tracker</li>
-      <li></li>
+      <li>Navigate to the habit-tracker directory: cd habit-tracking_app</li>
+      <li>Install any dependencies required by the project: pip install -r requirements.txt</li>
+      <li>Run the project by executing the menu Python file: python menu.py</li>
+      This should start the habit tracking program and allow you to interact with it via the user interface provided by the project.
     <ul>
 <h2>Features</h2>
 <h3>Create new habits</h3>
@@ -73,12 +75,12 @@ This UML diagram provides a visual representation of the one-to-many relationshi
 the Habit and HabitTracker classes, with one HabitTracker having zero or more Habit objects associated 
 with it. The folder structure for this project looks like this:
  <ul>
-  <li>Folder
+  <li>parent directory/
     <ul>
-      <li>subdir1</li>
-      <li>subdir2</li>
+      <li>menu.py</li>
+      <li>habit_tracking_app.py</li>
     </ul>
   </li>
 </ul>
-
+The Habit and HabitTracker objects can live together in one module. The menu interface simply allows a user to navigate through a set of options and perform different actions based on their selections.
 </body>
