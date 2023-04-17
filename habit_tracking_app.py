@@ -2,8 +2,8 @@ import pandas as pd
 import datetime
 import sys
 from typing import Union
-#from other_fun import *
-# So that the index will start from 1
+
+
 last_id = 0
 class Habit:
     """
