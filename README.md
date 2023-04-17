@@ -20,11 +20,10 @@ Before using the Habit Tracker App make sure you have Python3 installed on your 
     <ul>
 <h2>Features</h2>
 <h3>Create new habits</h3>
-We create a new `HabitTracker` instance called `tracker`. We pass in the name of the habit,"Study OOP", the start date of the habit period,`2023-04-01`, the end date of the habit period,"2023-04-28", and the frequency,'D'.
+To start tracking habits, you need to create a HabitTracker instance by providing the name of the user. Then we pass in the name of the habit,"Study OOP", the start date of the habit period,`2023-04-01`, the end date of the habit period,"2023-04-28", and the frequency,'D'.
 
 ```
 tracker = HabitTracker("John")
-tracker.addHabit("Brush your teeth","2023-04-01","2023-04-28","D")
 tracker.addHabit("Study OOP","2023-04-01","2023-04-28","D")
 ```
 
@@ -72,6 +71,14 @@ first class diagram:
 <img src="uml_diagr.png" alt="Description of the image">
 This UML diagram provides a visual representation of the one-to-many relationship between 
 the Habit and HabitTracker classes, with one HabitTracker having zero or more Habit objects associated 
-with it. 
+with it. The folder structure for this project looks like this:
+ <ul>
+  <li>Folder
+    <ul>
+      <li>subdir1</li>
+      <li>subdir2</li>
+    </ul>
+  </li>
+</ul>
 
 </body>
