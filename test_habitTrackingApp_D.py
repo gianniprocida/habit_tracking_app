@@ -8,7 +8,7 @@ from other_fun import *
 
 class Test_Habit(unittest.TestCase):
     def setUp(self):
-        self.obj1 = Habit("Brush your teeth","2023-03-01","2023-03-28","D")
+        self.obj1 = Habit("Brush teeth","2023-03-01","2023-03-28","D")
         self.obj2 = Habit("Study Python","2023-03-01","2023-03-28","D")
         self.obj3 = Habit("Study SQL","2023-04-01","2023-04-28","D")
         self.obj4 = Habit("Study JS","2023-04-01","2023-04-28","D")
@@ -93,15 +93,15 @@ class Test_Habit(unittest.TestCase):
 class TestHabitTracker(unittest.TestCase):
     def setUp(self):
         self.objTracker = HabitTracker("John")
-        self.objTracker.add_habit("Brush your teeth","2023-03-01","2023-03-28","D")
+        self.objTracker.add_habit("Brush teeth","2023-03-01","2023-03-28","D")
         self.objTracker.add_habit("Study Python","2023-03-01","2023-03-28","D")
         self.objTracker.add_habit("Study SQL","2023-04-01","2023-04-28","D")
         self.objTracker.add_habit("Study JS","2023-04-01","2023-04-28","D")
       
 
     def test_get_habit_by_name(self):
-        h = self.objTracker.get_habit_by_name("Brush your teeth")
-        self.assertEqual(h.name,"Brush your teeth")
+        h = self.objTracker.get_habit_by_name("Brush teeth")
+        self.assertEqual(h.name,"Brush teeth")
 
         h = self.objTracker.get_habit_by_name("Study Python")
         self.assertEqual(h.name,"Study Python")
@@ -122,17 +122,17 @@ class TestHabitTracker(unittest.TestCase):
         defined in the setUp method
         """
 
-        create_checkofflist_alternated_items(self.objTracker,8,"Brush your teeth")
+        create_checkofflist_alternated_items(self.objTracker,8,"Brush teeth")
 
-        create_checkofflist_one_item(self.objTracker,10,"y","Brush your teeth")
+        create_checkofflist_one_item(self.objTracker,10,"y","Brush teeth")
    
-        create_checkofflist_one_item(self.objTracker,10,"n","Brush your teeth")
+        create_checkofflist_one_item(self.objTracker,10,"n","Brush teeth")
 
         excepted = ['y', 'n', 'y', 'n', 'y', 'n', 'y', 'n','y','y','y','y',\
                'y','y','y','y','y','y','n','n','n','n','n','n','n','n',\
                'n','n']
 
-        h = self.objTracker.get_habit_by_name("Brush your teeth")
+        h = self.objTracker.get_habit_by_name("Brush teeth")
 
         self.assertEqual(h.checkoffList,excepted)
         self.assertEqual(h.longest_habit_streak,10)
@@ -194,14 +194,14 @@ class TestHabitTracker(unittest.TestCase):
         h = self.objTracker.get_habit_with_longest_run_streak_of_all()
     
        
-        self.assertEqual({"Brush your teeth":10},h)
+        self.assertEqual({"Brush teeth":10},h)
 
     def test_delete_habit(self):
         """This test case checks whether the delete_habit method correctly deletes a habit in the context of a
           Tracking object
         """
 
-        self.objTracker.delete_habit("Brush your teeth")
+        self.objTracker.delete_habit("Brush teeth")
         self.objTracker.delete_habit("Study Python")
         self.objTracker.delete_habit("Study SQL")
         self.objTracker.delete_habit("Study JS")

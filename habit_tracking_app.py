@@ -12,7 +12,7 @@ class Habit:
     Attributes:
         name (str): The name of the habit you wish to create.
         start (str): The date when the habit is planned to start.
-        end (str): The date when the habit is planned to start.
+        end (str): The date when the habit is planned to end.
         freq (str): The frequency with which the habit is planned to occur.
 
      Methods:
@@ -37,6 +37,7 @@ class Habit:
         self.start = start
         self.end = end
         self.freq = freq
+        self.creation_date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
         self.checkoffList = []
         global last_id
         last_id+=1
