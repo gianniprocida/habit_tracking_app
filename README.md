@@ -16,7 +16,10 @@ Before using the Habit Tracking App make sure you have Python3 installed on your
      <ul>
       <li>Clone the repository from GitHub: git clone https://github.com/gianniprocida/habit_tracking_app.git</li>
       <li>Navigate to the habit-tracker directory: cd habit-tracking_app</li>
-      <li>Install any dependencies required by the project: pip install -r requirements.txt</li>
+      <li>Install any dependencies required by the project:
+        <ul>
+          <li>pandas</li>
+        </ul> 
       <li>Run the project by executing the menu Python file: python menu.py</li>
       This should start the habit tracking program and allow you to interact with it via the user interface provided by the project.
     <ul>
