@@ -3,6 +3,9 @@ import pandas as pd
 from habit_tracking_app import Habit,HabitTracker
 from other_fun import *
 
+
+# Tests for daily habits
+
 class Test_Habit(unittest.TestCase):
     def setUp(self):
         self.obj1 = Habit("Brush your teeth","2023-03-01","2023-03-28","D")
