@@ -15,6 +15,13 @@ class Habit:
         end (str): The date when the habit is planned to end.
         freq (str): The frequency with which the habit is planned to occur.
 
+     Additional Attributes:
+        last_id (int): The id associated with the Habit object.
+        completed (bool):default False, True if the habit is completed within the given period .
+        checkoffList (lst): A list that contains "y" or "n" to indicate whether the habit was completed or not for a day.
+        longest_habit_streak (int): The maximum number of times the habit was completed in a row.
+        count_of_yes (int): The number of 'y' in the checkoffList 
+
      Methods:
     __init__(self, name: str,start:str,end:str,freq:str) -> None
         Initializes a Habit object with the given name, starting date,end date and frequency.
@@ -44,13 +51,13 @@ class Habit:
         self.id = last_id   
         self.completed = False
         self.longest_habit_streak = None
-        self.count_of_completed_habit = None
+        self.count_of_yes = None
 
     def checkoff(self,check: Union["y","n"]):
-        """Perform operations on the properties of the habit class.
-        Adds "y" or "n" to the checkoffList property of the class, 
-        Keeps track of the number of consecutive 'y' in the checkoffList (longest_habit_streak)
-        Keeps track of the number of 'y' in the checkoffList (count_of_completed_habit)
+        """Perform operations on the attributes of the habit class.
+        Adds "y" or "n" to the checkoffList attribute of the class, 
+        Keeps the number of times the habit was completed in a row (longest_habit_streak)
+        Keeps track of the number of 'y' in the checkoffList (count_of_yes)
         Sets completed to True If the checkoffList property of the class has reached a length equal to the given period.
 
         Args:
@@ -91,7 +98,7 @@ class Habit:
               return 
         if len(self.checkoffList) == length_of_period:
             self.completed = True
-            self.count_of_completed_habit = self.checkoffList.count("y")
+            self.count_of_yes = self.checkoffList.count("y")
             self.longest_habit_streak = ans
             print(f"The daily habit of {self.name} was completed within the period of {self.start} to {self.end}")
         
@@ -330,10 +337,8 @@ if __name__=='__main__':
     myhabit = tracker.get_habit_by_name("Study Python")
 
     print(myhabit.name)
-
-    myhabit = tracker.get_habit_with_longest_run_streak_of_all
     
-    tracker.get_dates_by_name("Study Python")
+
 
     tracker.checkoff_by_name("Study Python","n")
     tracker.checkoff_by_name("Study Python","y")
@@ -361,5 +366,3 @@ if __name__=='__main__':
 
     #{'2023-04-01-2023-04-22': ['Study SQL', 'Study Python'], '2023-05-01-2023-05-22': ['Study OOP']}
     print(tracker.get_habits_with_same_property("time_period_string"))
-
-    
