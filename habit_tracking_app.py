@@ -269,7 +269,8 @@ class HabitTracker:
             print(f"Invalid argument {check}. Expected 'y' or 'n'.")
         habit.checkoff(check)
     def get_habits_with_same_property(self,myprop:Union["time_period_string","freq"]):
-        """Group habits by property
+        """
+        Group habits by property
         
         Returns a dictionary with property key and lists of the name of the habit objects that share 
         the same property key.

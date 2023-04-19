@@ -42,6 +42,16 @@ class Menu:
             else:
                 print("{0} is not a valid choice")
     def show(self,habit):
+        """
+        Show habits
+         
+        Args:
+        habit (obj) or (dict): If the habit parameter is a dictionary, it suggests that either
+        the 'get_habit_with_longest_run_streak_of_all' or 'get_habits_with_same_property'
+        function has been called. If 'habit' is not a dictionary, it suggests that 
+        either 'get_habit_by_name' or 'get_habit_by_id' has been invoked.
+        
+        """
         if not habit:
             print("Habit not found")
         elif isinstance(habit,dict) and isinstance(list(habit.values())[0],int):
