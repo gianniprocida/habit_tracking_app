@@ -4,8 +4,8 @@ import sys,json
 
 class Menu:
     """Display a menu and respond to choices when run."""
-    def __init__(self):
-        self.tracker = HabitTracker("gianni")
+    def __init__(self,user_name):
+        self.tracker = HabitTracker(user_name)
         self.choices = {
             "1":self.add,
             "2":self.show_all_habits_and_details,
@@ -96,7 +96,8 @@ class Menu:
             json.dump(d,out)
         sys.exit(0)
 if __name__=="__main__":
-    Menu().run()
+    user_name = input("Enter your name: ")
+    Menu(user_name).run()
 
 
 #Brush your teeth 2023-03-01 2023-03-03 D

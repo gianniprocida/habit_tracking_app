@@ -319,7 +319,7 @@ class HabitTracker:
                     name = habit.name
         return {name:longest_run_streak_of_all}
     def to_dict(self):
-        return {'habits':[habit.to_dict() for habit in self.habits]}
+        return {'user':self.user,'habits':[habit.to_dict() for habit in self.habits]}
 
 if __name__=='__main__':
 
