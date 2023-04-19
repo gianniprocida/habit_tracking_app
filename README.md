@@ -96,7 +96,7 @@ has attributes like user name and a list of habits. This will make it easier to 
 
 
 
-<img src="uml_diag_menu.png" alt="Description of the image">
+<img style="width: 50%";src="uml_diag_menu.png" alt="Description of the image">
 
 
 
