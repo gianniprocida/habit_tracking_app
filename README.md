@@ -94,10 +94,7 @@ has attributes like user name and a list of habits. This will make it easier to 
  To interact with these objects, we can create a menu-based interface that allows users to carry out the aforementioned actions, including listing all the habits stored in the HabitTracker container object. The interface will provide users with a user-friendly approach to managing theirs habits and monitoring their advancement towards completing them.  It's also worth noting the type of relationship between the Menu class and the HabitTracker class. The Menu class and the HabitTracker class are in a "part-of" relationship because the HabitTracker class is a part of the Menu class object. While the HabitTracker class object has its own implementation, its object is created only after the Menu class object is created.
 
 
-
-<figure style="width: 20%; height: auto;">
-    <img src="uml_diag_menu.png" alt="Image Description">
-</figure>
+<img src="uml_diag_menu.png" alt="Description of the image">
 
 
 
