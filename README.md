@@ -90,6 +90,8 @@ has attributes like user name and a list of habits. This will make it easier to 
  one-to-many relationship between the Habit and<span style="color: red;">HabitTracker</span>classes, with one HabitTracker
   having zero or more Habit objects associated with it. 
 <img src="uml_diagr.png" alt="Description of the image">
+ 
+ 
  The folder structure for this project looks like this:
  <ul>
   <li>parent directory/
