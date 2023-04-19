@@ -95,7 +95,7 @@ has attributes like user name and a list of habits. This will make it easier to 
 
 
 
-<figure style="width: 50%; height: auto;">
+<figure style="width: 20%; height: auto;">
     <img src="uml_diag_menu.png" alt="Image Description">
 </figure>
 
