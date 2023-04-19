@@ -86,11 +86,10 @@ has attributes like user name and a list of habits. This will make it easier to 
  method will stop adding additional marks to the checkofflist attribute.
  The relationship between the two classes of objects in our tracking app can be described 
  using a UML class diagram. 
- 
  This UML diagram provides a visual representation of the 
  one-to-many relationship between the Habit and<span style="color: red;">HabitTracker</span>classes, with one HabitTracker
   having zero or more Habit objects associated with it. 
-
+<img src="uml_diagr.png" alt="Description of the image">
  The folder structure for this project looks like this:
  <ul>
   <li>parent directory/
