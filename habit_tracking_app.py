@@ -256,18 +256,19 @@ class HabitTracker:
         This function does not return anything.
 
         Raises:
-          Habit not found: If the habit name is not found in the habits list.
-        
-        Raises:
           ValueError: If the 'check' argument is not "y" or "n". 
-        """
 
-        habit = self.get_habit_by_name(name) 
-        if not self.get_habit_by_name(name):
-            print("Habit not found")
+        Raises:
+          ValueError: If the habit is not found.   
+        """
+        
+        habit = self.get_habit_by_name(name)
+        if not habit:
+            raise TypeError("Cannot checkoff a habit that does not exist")
         if check not in ["y","n"]:
-            print(f"Invalid argument {check}. Expected 'y' or 'n'.")
+            raise TypeError(f"Invalid argument {check}. Expected 'y' or 'n'")
         habit.checkoff(check)
+        
     def get_habits_with_same_property(self,myprop:Union["time_period_string","freq"]):
         """
         Group habits by property
@@ -282,10 +283,6 @@ class HabitTracker:
         Returns:
         Dict[str, List[name]]: A dictionary with subject keys and lists of the name habit objects.
 
-
-        Raises:
-          Habit not found: If the habit name is not found in the habits list.
-        
         """
         
         if myprop not in ["time_period_string","freq"]:

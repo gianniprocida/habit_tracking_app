@@ -112,5 +112,5 @@ The interface simply needs to present a menu and allow the user to input choices
     </ul>
   </li>
 </ul>
-The Habit and HabitTracker objects can live together in one module. The menu interface simply allows a user to navigate through a set of options and perform different actions based on their selections.
+The Habit and HabitTracker objects can live together in one module. 
 </body>
