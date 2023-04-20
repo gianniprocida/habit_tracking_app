@@ -40,7 +40,7 @@ class Menu:
             if action:
                 action()
             else:
-                print("{0} is not a valid choice")
+                print(f"{choice} is not a valid choice")
     def show(self,habit):
         """
         Show habits
@@ -56,16 +56,19 @@ class Menu:
             print("Habit not found")
         elif isinstance(habit,dict) and isinstance(list(habit.values())[0],int):
             print("Longest run streak of all: {0}\nHabit:{1}".format(list(habit.values())[0],list(habit.keys())[0]))
+            print(" ")
         elif isinstance(habit,dict) and isinstance(list(habit.values())[0],list):
             for key in habit:
                 print("{0}: {1}".format(key,habit[key]))
+                print(" ")
         else:
             print("{0}: {1}\n{2}\n{3}".format(habit.name, habit.start,habit.end,habit.completed))
+            print(" ")
     def show_all_habits_and_details(self):
         for habit in self.tracker.habits:
             print(" ")
             print("Habit:{0}\nStart:{1}\nEnd:{2}\nFreq:{3}\nCheckoffList:{4}\nCompleted:{5}\nLongest_streak:{6}\ncount_of_y:{7}".format(habit.name, habit.start,habit.end,habit.freq,\
-                                                                                                                                        habit.checkoffList,habit.completed,habit.longest_habit_streak,habit.count_of_yes))
+                                                                                                                              habit.checkoffList,habit.completed,habit.longest_habit_streak,habit.count_of_yes))
             print(" ")
     def add(self):
         val1 = input("Enter your the name of the habit you wish to add: ")
@@ -77,7 +80,7 @@ class Menu:
                 datetime.datetime.strptime(val2,"%Y-%m-%d")
                 break
             except ValueError:
-                print("The starting date is not in the correct format")
+                print("Starting date is not in the correct format")
                 val2 = input("Enter starting date in the format YYYY-MM-DD.")
         print(f"You entered the date {val2}")
         while True:
@@ -85,7 +88,7 @@ class Menu:
                 datetime.datetime.strptime(val3,"%Y-%m-%d")
                 break
             except ValueError:
-                print("The end date is not in the correct format")
+                print("End date is not in the correct format")
                 val3 = input("Enter starting date in the format YYYY-MM-DD.")
         print(f"You entered the date {val3}")
 
@@ -104,7 +107,7 @@ class Menu:
            self.tracker.add_habit(val1,val2,val3,val4)
            print("Your habit has been added")
         else:
-            print("end data cannot be older than starting date")
+            print("end date cannot be older than starting date")
         print(" ")
     def show_by_name(self):
         val = input("Enter a habit: ")
@@ -131,7 +134,7 @@ class Menu:
         print(f"You entered {val1}")
 
         val2 = input("Enter 'y' or 'n' to indicate whether the task was completed today. Enter the two values separed by space: ")
-        #2023-04-01 2023-04-05
+        
         while True:
             try:
                 if val2 in ["y","n"]:
@@ -152,6 +155,16 @@ class Menu:
         self.tracker.delete_habit(val)
     def show_habits_with_same_property(self):
         val = input("Enter the property (time_period_string or freq) by you wish to group your habits: ")
+        while True:
+            try:
+                if val in ["time_period_string","freq"]:
+                    break
+                else:
+                    raise ValueError
+            except ValueError:
+                print("f{val} is neither time_period_string nor freq}")
+                val = input("Enter 'y' or 'n': ")
+        print(f"You entered {val}")
         habit = self.tracker.get_habits_with_same_property(val)
         self.show(habit)
     def quit(self):

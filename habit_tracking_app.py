@@ -28,13 +28,15 @@ class Habit:
     """
      
     def __init__(self,name,start,end,freq:Union["D","W"]):
+
         if not isinstance(name,str):
-            raise TypeError(f"{name} must be a string")
-        if not isinstance(start,str):
-            raise TypeError(f"{start} must be a string")
-      
-        if not isinstance(end,str):
-            raise TypeError("end must be a string")
+            raise TypeError("name must be a string.")
+        
+        if not datetime.datetime.strptime(start,"%Y-%m-%d"):
+            raise TypeError("Start is not in the correct format.")
+        
+        if not datetime.datetime.strptime(end,"%Y-%m-%d"):
+            raise TypeError("end is not in the correct format")
 
         if freq not in ["D","W"]:
             raise ValueError(f"Invalid argument {freq}. Expected 'D' or 'W'.")
@@ -236,7 +238,7 @@ class HabitTracker:
         """
 
         if not self.get_habit_by_name(name):
-            print(f"Error: the habit {name} is not in the HabitTracker!")
+            print(f"The habit {name} is not in the HabitTracker!")
         else:
             self.habits = [item for item in self.habits if item.name != name] +\
             [item for item in self.habits if item.name == name]
@@ -324,7 +326,7 @@ if __name__=='__main__':
 
         
     tracker = HabitTracker("John")
-    tracker.add_habit("Study SQL","2023-04-01","2023-04-22","W")
+    tracker.add_habit("Study SQL","2023-01-01","2023-04-22","D")
     tracker.add_habit("Study Python","2023-04-01","2023-04-22","W")
     tracker.add_habit("Study OOP","2023-05-01","2023-05-22","W")
 
