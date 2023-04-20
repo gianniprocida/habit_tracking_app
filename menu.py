@@ -64,11 +64,13 @@ class Menu:
     def show_all_habits_and_details(self):
         for habit in self.tracker.habits:
             print(" ")
-            print("Habit:{0}\nStart:{1}\nEnd:{2}\nFreq:{3}\nCheckoffList:{4}\nCompleted:{5}".format(habit.name, habit.start,habit.end,habit.freq,habit.checkoffList,habit.completed))
+            print("Habit:{0}\nStart:{1}\nEnd:{2}\nFreq:{3}\nCheckoffList:{4}\nCompleted:{5}\nLongest_streak:{6}\ncount_of_y:{7}".format(habit.name, habit.start,habit.end,habit.freq,\
+                                                                                                                                        habit.checkoffList,habit.completed,habit.longest_habit_streak,habit.count_of_yes))
             print(" ")
     def add(self):
         val1 = input("Enter your the name of the habit you wish to add: ")
-
+        
+        #Check input data using a while loop until user enters correct data
         val2,val3,val4= input("Enter starting date, end date (in the format YYYY-MM-DD) and frequency (W or D) separated by spaces:").split()
         while True:
             try:
@@ -96,10 +98,13 @@ class Menu:
             except ValueError:
                  print(f"{val4} is neither D nor W") 
                  val4 = input("Enter a starting date")
-        print(f"You entered {val4} frequency")    
+        print(f"You entered {val4} frequency")   
 
-        self.tracker.add_habit(val1,val2,val3,val4)
-        print("Your habit has been added")
+        if val3 > val2: 
+           self.tracker.add_habit(val1,val2,val3,val4)
+           print("Your habit has been added")
+        else:
+            print("end data cannot be older than starting date")
         print(" ")
     def show_by_name(self):
         val = input("Enter a habit: ")
@@ -112,6 +117,7 @@ class Menu:
     def checkoff(self):
         val1 = input("Enter the habit you completed:")
         
+        #Check input data using a while loop until user enters correct data
         while True:
             habit = self.tracker.get_habit_by_name(val1)
             try:

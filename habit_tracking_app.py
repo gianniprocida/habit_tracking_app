@@ -111,7 +111,7 @@ class Habit:
         A dictionary containing the Habits object's data.
         """
 
-        return {'name':self.name,'time_period_string':self.time_period_string,'checkoffList':self.checkoffList,'completed':self.completed}
+        return {'name':self.name,'time_period_string':self.time_period_string,'checkoffList':self.checkoffList,'completed':self.completed,'count_of_yes':self.count_of_yes}
     
     def print_dates_left(self):
         """
@@ -261,7 +261,7 @@ class HabitTracker:
         Raises:
           ValueError: If the habit is not found.   
         """
-        
+
         habit = self.get_habit_by_name(name)
         if not habit:
             raise TypeError("Cannot checkoff a habit that does not exist")
