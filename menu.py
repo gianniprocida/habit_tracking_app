@@ -14,7 +14,8 @@ class Menu:
             "5":self.checkoff,
             "6":self.show_habit_with_longest_run_streak_of_all,
             "7":self.show_habits_with_same_property,
-            "8":self.quit
+            "8":self.show_barchart,
+            "9":self.quit
             }
         
     def display_menu(self):
@@ -28,7 +29,8 @@ class Menu:
     5. Check off
     6. Show habit with longest run streak of all
     7. Show habits with the same property
-    8. Quit
+    8. Show bar chart
+    9. Quit
     
     """)
     def run(self):
@@ -49,11 +51,16 @@ class Menu:
         habit (obj) or (dict): If the habit parameter is a dictionary, it suggests that either
         the 'get_habit_with_longest_run_streak_of_all' or 'get_habits_with_same_property'
         function has been called. If 'habit' is not a dictionary, it suggests that 
-        either 'get_habit_by_name' or 'get_habit_by_id' has been invoked.
+        either 'get_habit_by_name' or 'get_habit_by_id' or 'data_visualization' has been invoked.
         
         """
         if not habit:
             print("Habit not found")
+        # If "/" exisits in the keys of habit dictionary, it means that data_visualization was invoked
+        elif isinstance(habit,dict) and "/" in "".join(habit.keys()):
+            for key in habit:
+                print("{0}: {1}".format(key,habit[key]))
+                print(" ")
         elif isinstance(habit,dict) and isinstance(list(habit.values())[0],int):
             print("Longest run streak of all: {0}\nHabit:{1}".format(list(habit.values())[0],list(habit.keys())[0]))
             print(" ")
@@ -71,7 +78,7 @@ class Menu:
                                                                                                                               habit.checkoffList,habit.completed,habit.longest_habit_streak,habit.count_of_yes))
             print(" ")
     def add(self):
-        val1 = input("Enter your the name of the habit you wish to add: ")
+        val1 = input("Enter the name of the habit you wish to add: ")
         
         #Check input data using a while loop until user enters correct data
         val2,val3,val4= input("Enter starting date, end date (in the format YYYY-MM-DD) and frequency (W or D) separated by spaces:").split()
@@ -133,7 +140,7 @@ class Menu:
                 val1 = input("Enter the habit you completed: ")
         print(f"You entered {val1}")
 
-        val2 = input("Enter 'y' or 'n' to indicate whether the task was completed today. Enter the two values separed by space: ")
+        val2 = input("Enter 'y' or 'n' to indicate whether the task was completed today: ")
         
         while True:
             try:
@@ -153,6 +160,9 @@ class Menu:
     def delete(self):
         val = input("Enter the habit you wish to delete")
         self.tracker.delete_habit(val)
+    def show_barchart(self):
+        habit = self.tracker.data_visualization()
+        self.show(habit)
     def show_habits_with_same_property(self):
         val = input("Enter the property (time_period_string or freq) by you wish to group your habits: ")
         while True:
@@ -188,4 +198,4 @@ if __name__=="__main__":
     Menu(user_name).run()
 
 
-#Brush your teeth 2023-03-01 2023-03-03 D
+#Brush 2023-03-01 2023-03-03 D

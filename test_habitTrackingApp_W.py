@@ -214,7 +214,7 @@ class TestHabitTracker(unittest.TestCase):
         groups habits by property
         """
 
-        key_to_compare = ["2023-04-01-2023-04-22","2023-05-01-2023-05-22"]
+        key_to_compare = ["2023-04-01/2023-04-22","2023-05-01/2023-05-22"]
         
         self.objTracker.add_habit("Study Flask","2023-05-01","2023-05-22","D")
 
@@ -229,7 +229,7 @@ class TestHabitTracker(unittest.TestCase):
 
         max_key = max(myres,key = lambda x : len(myres[x]))
 
-        self.assertEqual(max_key,"2023-05-01-2023-05-22")
+        self.assertEqual(max_key,"2023-05-01/2023-05-22")
 
         self.assertEqual(set(myres[max_key]),set(["Study OOP","Study Data modeling","Study git","Study Flask"]))
 

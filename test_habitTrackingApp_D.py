@@ -19,7 +19,7 @@ class Test_Habit(unittest.TestCase):
     
     def test_checkoff(self):
         """
-        This test case verifies that the checkoff method correctly updates a task's completion status for the current day.
+        This test case verifies that the checkoff method correctly updates a task's completion status for a day.
         To do this,the test case creates four checkoff_lists for each habit defined in the setUp method. It then checks whether that
         the resulting lists match the expected outcome. Additionally, the test case checks whether the checkoff method 
         correctly identifies the longest run streak within the habit.
@@ -117,7 +117,7 @@ class TestHabitTracker(unittest.TestCase):
 
     def test_longest_run_streak_of_all(self):
         """This test case checks whether the checkoff method correctly updates a task's completion status for the 
-        current day in the context of a HabitTracker object. It then checks whether the 
+        a day in the context of a HabitTracker object. It then checks whether the 
         get_longest_run_streak_of_all function correctly calculates the longest run streak for a set of habits 
         defined in the setUp method
         """
@@ -212,7 +212,7 @@ class TestHabitTracker(unittest.TestCase):
         groups habits by property
         """
 
-        key_to_compare = ["2023-03-01-2023-03-28","2023-04-01-2023-04-28"]
+        key_to_compare = ["2023-03-01/2023-03-28","2023-04-01/2023-04-28"]
         
         self.objTracker.add_habit("Study Flask","2023-04-01","2023-04-28","D")
 
@@ -227,9 +227,58 @@ class TestHabitTracker(unittest.TestCase):
 
         max_key = max(myres,key = lambda x : len(myres[x]))
 
-        self.assertEqual(max_key,"2023-04-01-2023-04-28")
+        self.assertEqual(max_key,"2023-04-01/2023-04-28")
 
         self.assertEqual(set(myres[max_key]),set(["Study JS","Study Flask","Study SQL"]))
+        
+    def test_data_visualization(self):
+
+        # Checkoff brush teeth
+        create_checkofflist_alternated_items(self.objTracker,8,"Brush teeth")
+
+        create_checkofflist_one_item(self.objTracker,10,"y","Brush teeth")
+   
+        create_checkofflist_one_item(self.objTracker,10,"n","Brush teeth")
+
+        #Checkoff Study Python
+
+        create_checkofflist_alternated_items(self.objTracker,8,"Study Python")
+
+        create_checkofflist_one_item(self.objTracker,10,"n","Study Python")
+   
+        create_checkofflist_one_item(self.objTracker,10,"y","Study Python")
+
+       
+       
+
+        # The checkoffList looks like : [y,n,y,n,y,n,y,n] so there four "y" 
+        create_checkofflist_one_item(self.objTracker,8,"y","Study SQL")
+
+        # The checkoffList looks like : [y,n,y,n,y,n,y,n,y,n] so there five "y" 
+        create_checkofflist_alternated_items(self.objTracker,10,"Study SQL")
+   
+        create_checkofflist_one_item(self.objTracker,10,"n","Study SQL")
+
+    
+        # Study JS
+
+        create_checkofflist_one_item(self.objTracker,8,"y","Study JS")
+       
+        # The checkoffList looks like : [y,y,y,y,y,y,y,y,y,y] so there ten "y" 
+        create_checkofflist_one_item(self.objTracker,10,"n","Study JS")
+   
+        # The checkoffList looks like : [y,n,y,n,y,n,y,n,y,n] so there five "y" 
+        create_checkofflist_alternated_items(self.objTracker,10,"Study JS")
+
+
+        # Expected output:
+        expected = {"2023-03-01/2023-03-28":28,"2023-04-01/2023-04-28":26}
+       
+        res = self.objTracker.data_visualization()
+         
+        self.assertEqual(res,expected)
+
+
 
 
 
