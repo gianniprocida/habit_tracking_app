@@ -77,18 +77,18 @@ start date, end date, frequency, checkofflist ( a list containing “y” or “
 whether the habit was completed or not for a day), ID, completed (whether the habit was 
 completed within the given period), and longest habit streak (the maximum number of times 
 the habit was completed in a row). To manage multiple habits in  the app, we can create a 
-<span style="color: red;">HabitTracker</span>  container object that 
+HabitTracker container object that 
 has attributes like user name and a list of habits. This will make it easier to add new
  habits, delete habits, retrieve habits by name, retrieve habits by id or group habits by 
  specific attribues, and find the habit with the longest run streak. Moreover, 
- the<span style="color: red;">Habit</span>object includes a<span style="color: red;">checkoff</span>method that 
+ the Habit object includes a checkoff method that 
  allows users to mark the habit as completed (“y” or “n”) at any point in time. However, the total number of marks cannot 
  exceed the number of days in that period. If the maximum number of marks is reached, the 
  method will stop adding additional marks to the checkofflist attribute.
  The relationship between the two classes of objects in our tracking app can be described 
  using a UML class diagram. 
  This UML diagram provides a visual representation of the 
- one-to-many relationship between the Habit and<span style="color: red;">HabitTracker</span>classes, with one HabitTracker
+ one-to-many relationship between the Habit and HabitTracker classes, with one HabitTracker
   having zero or more Habit objects associated with it. 
 <img src="uml_diagr.png" alt="Description of the image">
  
