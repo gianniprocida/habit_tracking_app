@@ -36,7 +36,7 @@ tracker.add_habit("Study Python","2023-04-01","2023-04-22","W")
 
 <h3>Delete a habit</h3>
 We call the `delete_habit` method on the HabitTracking class and pass in the name of the habit we want to delete.
-This will remove the habit from the tracker object.
+This will remove the habit with the name "Study Python" from the tracker object.
 
 ```
 tracker.delete_habit("Study Python")
