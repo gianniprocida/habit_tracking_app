@@ -18,7 +18,7 @@ Before using the Habit Tracking App make sure you have Python3 installed on your
       <li>Navigate to the habit-tracker directory: cd habit-tracking_app</li>
       <li>Install any dependencies required by the project:
         <ul>
-          <li>pandas</li>
+          <li>pandas,matplotlib</li>
         </ul>
       </li>   
       <li>Run the project by executing the menu Python file: python menu.py</li>
