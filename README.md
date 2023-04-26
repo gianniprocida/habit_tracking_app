@@ -6,9 +6,8 @@
 <body>
 <h1>Overview</h1>
 <hr>
-<p>Habit tracking app that allows users to track their daily habits and 
-      monitor their progress over time. Users can create, modifiy, delete, and search habits, and check off each day
-    they complete the habit</a></p>
+<p>Habit tracking app that allows users to track their daily and weekly habits and 
+      monitor their progress over time. </a></p>
 <h2>Getting started</h2>
 
 Before using the Habit Tracking App make sure you have Python3.6 installed on your computer.
