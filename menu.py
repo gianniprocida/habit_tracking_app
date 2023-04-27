@@ -72,6 +72,11 @@ class Menu:
             print("{0}: {1}\n{2}\n{3}".format(habit.name, habit.start,habit.end,habit.completed))
             print(" ")
     def show_all_habits_and_details(self):
+        """
+        List all habits that are currently being tracked.
+         
+        
+        """
         for habit in self.tracker.habits:
             print(" ")
             print("Habit:{0}\nStart:{1}\nEnd:{2}\nFreq:{3}\nCheckoffList:{4}\nCompleted:{5}\nLongest_streak:{6}\ncount_of_y:{7}".format(habit.name, habit.start,habit.end,habit.freq,\
