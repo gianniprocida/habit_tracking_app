@@ -10,7 +10,7 @@
       monitor their progress over time. </a></p>
 <h2>Getting started</h2>
 
-Before using the Habit Tracking App make sure you have Python3.6 installed on your computer.
+Before using the Habit Tracking App make sure you have Python3.8 installed on your computer.
 <h3>How to run it?</h3>
      <ul>
       <li>Clone the repository from GitHub: git clone https://github.com/gianniprocida/habit_tracking_app.git</li>
@@ -20,7 +20,7 @@ Before using the Habit Tracking App make sure you have Python3.6 installed on yo
           <li>pandas,matplotlib</li>
         </ul>
       </li>   
-      <li>Run the project by executing the menu Python file: python menu.py</li>
+      <li>Run the project by executing the menu Python file: python3.8 menu.py</li>
       This should start the habit tracking program and allow you to interact with it via the user interface provided by the project.
     <ul>
   <h3>How to run unittests script</h3>
