@@ -23,6 +23,10 @@ Before using the Habit Tracking App make sure you have Python3.6 installed on yo
       <li>Run the project by executing the menu Python file: python menu.py</li>
       This should start the habit tracking program and allow you to interact with it via the user interface provided by the project.
     <ul>
+  <h3>How to run unittests script</h3>
+  <ul>
+  <li> To execute tests for daily habits in the habit tracking app, run the script test_habitTrackingApp_D.py using the following command: python3.8 -m unittest test_habitTrackingApp_D.py. For weekly habits, use the script test_habitTrackingApp_W.py instead.</li>
+<li> To execute tests for the function get_habit_by_id in the habit tracking app, run the script test_get_habit_by_id.py using the following command: python3.8 -m unittest test_get_habit_by_id.</li>
 <h2>Features</h2>
 <h3>Create new habits</h3>
 To start tracking habits, you need to create a HabitTracker instance by providing the name of the user. Then we pass in the name of the habit,"Study OOP", the start date of the habit period,`2023-04-01`, the end date of the habit period,"2023-04-28", and the frequency,'D'.

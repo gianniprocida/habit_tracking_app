@@ -1,7 +1,7 @@
 import unittest
 import pandas as pd
 from habit_tracking_app import Habit,HabitTracker
-from other_fun import *
+from generateUserData import *
 
 
 # Tests for daily habits
