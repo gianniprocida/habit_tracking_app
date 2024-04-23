@@ -35,11 +35,11 @@ class Test_Habit(unittest.TestCase):
         create_checkofflist_one_item(self.obj1,10,"n")
         
         # Final checkofflist
-        excepted = ['y', 'n', 'y', 'n', 'y', 'n', 'y', 'n','y','y','y','y',\
+        expected = ['y', 'n', 'y', 'n', 'y', 'n', 'y', 'n','y','y','y','y',\
                'y','y','y','y','y','y','n','n','n','n','n','n','n','n',\
                'n','n']
         
-        self.assertEqual(self.obj1.checkoffList,excepted)
+        self.assertEqual(self.obj1.checkoffList,expected)
         self.assertEqual(self.obj1.longest_habit_streak,10)
 
 
@@ -49,11 +49,11 @@ class Test_Habit(unittest.TestCase):
    
         create_checkofflist_one_item(self.obj2,10,"y")
 
-        excepted = ['y', 'n', 'y', 'n', 'y', 'n', 'y', 'n','n','n','n','n',\
+        expected = ['y', 'n', 'y', 'n', 'y', 'n', 'y', 'n','n','n','n','n',\
                'n','n','n','n','n','n','y','y','y','y','y','y','y','y',\
                'y','y']
 
-        self.assertEqual(self.obj2.checkoffList,excepted)
+        self.assertEqual(self.obj2.checkoffList,ex)
         self.assertEqual(self.obj2.longest_habit_streak,10)
 
         # ["y","y","y","y","y","y","y","y"]
@@ -66,11 +66,11 @@ class Test_Habit(unittest.TestCase):
         create_checkofflist_one_item(self.obj3,10,"n")
         
         # Final checkoffList
-        excepted = ["y","y","y","y","y","y","y","y","y","n","y","n","y","n","y","n","y","n",\
+        expected = ["y","y","y","y","y","y","y","y","y","n","y","n","y","n","y","n","y","n",\
         "n","n","n","n","n","n","n","n","n","n"]
         
       
-        self.assertEqual(self.obj3.checkoffList,excepted)
+        self.assertEqual(self.obj3.checkoffList,expected)
         self.assertEqual(self.obj3.longest_habit_streak,9)
 
 
@@ -83,10 +83,10 @@ class Test_Habit(unittest.TestCase):
        
         create_checkofflist_alternated_items(self.obj4,10)
 
-        excepted = ["y","y","y","y","y","y","y","y","n","n","n","n","n","n","n",\
+        expected = ["y","y","y","y","y","y","y","y","n","n","n","n","n","n","n",\
                     "n","n","n","y","n","y","n","y","n","y","n","y","n"]
         
-        self.assertEqual(self.obj4.checkoffList,excepted)
+        self.assertEqual(self.obj4.checkoffList,expected)
         self.assertEqual(self.obj4.longest_habit_streak,8)
 
 
@@ -128,13 +128,13 @@ class TestHabitTracker(unittest.TestCase):
    
         create_checkofflist_one_item(self.objTracker,10,"n","Brush teeth")
 
-        excepted = ['y', 'n', 'y', 'n', 'y', 'n', 'y', 'n','y','y','y','y',\
+        expected = ['y', 'n', 'y', 'n', 'y', 'n', 'y', 'n','y','y','y','y',\
                'y','y','y','y','y','y','n','n','n','n','n','n','n','n',\
                'n','n']
 
         h = self.objTracker.get_habit_by_name("Brush teeth")
 
-        self.assertEqual(h.checkoffList,excepted)
+        self.assertEqual(h.checkoffList,expected)
         self.assertEqual(h.longest_habit_streak,10)
 
 
@@ -146,13 +146,13 @@ class TestHabitTracker(unittest.TestCase):
    
         create_checkofflist_one_item(self.objTracker,10,"y","Study Python")
 
-        excepted = ['y', 'n', 'y', 'n', 'y', 'n', 'y', 'n','n','n','n','n',\
+        expected = ['y', 'n', 'y', 'n', 'y', 'n', 'y', 'n','n','n','n','n',\
                'n','n','n','n','n','n','y','y','y','y','y','y','y','y',\
                'y','y']
         
         h = self.objTracker.get_habit_by_name("Study Python")
 
-        self.assertEqual(h.checkoffList,excepted)
+        self.assertEqual(h.checkoffList,expected)
 
         self.assertEqual(h.longest_habit_streak,10)
 
@@ -166,12 +166,12 @@ class TestHabitTracker(unittest.TestCase):
     
         create_checkofflist_one_item(self.objTracker,10,"n","Study SQL")
 
-        excepted = ["y","y","y","y","y","y","y","y","y","n","y","n","y","n","y","n","y","n",\
+        expected = ["y","y","y","y","y","y","y","y","y","n","y","n","y","n","y","n","y","n",\
         "n","n","n","n","n","n","n","n","n","n"]
         
         h = self.objTracker.get_habit_by_name("Study SQL")
       
-        self.assertEqual(h.checkoffList,excepted)
+        self.assertEqual(h.checkoffList,expected)
         self.assertEqual(h.longest_habit_streak,9)
 
 
@@ -183,12 +183,12 @@ class TestHabitTracker(unittest.TestCase):
 
         create_checkofflist_alternated_items(self.objTracker,10,"Study JS")
 
-        excepted = ["y","y","y","y","y","y","y","y","n","n","n","n","n","n","n",\
+        expected = ["y","y","y","y","y","y","y","y","n","n","n","n","n","n","n",\
                     "n","n","n","y","n","y","n","y","n","y","n","y","n"]
         
         h = self.objTracker.get_habit_by_name("Study JS")
 
-        self.assertEqual(h.checkoffList,excepted)
+        self.assertEqual(h.checkoffList,expected)
         self.assertEqual(h.longest_habit_streak,8)
 
         h = self.objTracker.get_habit_with_longest_run_streak_of_all()
