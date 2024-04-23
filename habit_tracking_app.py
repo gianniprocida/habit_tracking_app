@@ -443,8 +443,24 @@ if __name__ == '__main__':
    # tracker.checkoff_by_name("sql", "y")
 
     sql = tracker.get_habit_by_id(0)
-
-    # print(tracker.length)
+    
+    def is_linked_list_sorted(tracker):
+        slow = tracker.head 
+        fast = tracker.head 
+        
+        if tracker.length == 1:
+            return True
+        
+        while fast.next:
+          slow = fast
+          fast = slow.next
+      
+        if fast.days_until_start <= slow.days_until_start:
+         return False
+        return True
+    
+    is_linked_list_sorted(tracker)
+        # print(tracker.length)
 
     # a1 = tracker.get_habit(0)
     # a2 = tracker.get_habit(1)
