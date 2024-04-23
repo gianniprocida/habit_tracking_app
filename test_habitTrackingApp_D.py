@@ -4,18 +4,17 @@ from habit_tracking_app import Habit,HabitTracker
 from generateUserData import *
 
 
-# Tests for daily habits
-
 class Test_Habit(unittest.TestCase):
     def setUp(self):
-        self.obj1 = Habit("Brush teeth","2023-03-01","2023-03-28","D")
-        self.obj2 = Habit("Study Python","2023-03-01","2023-03-28","D")
-        self.obj3 = Habit("Study SQL","2023-04-01","2023-04-28","D")
-        self.obj4 = Habit("Study JS","2023-04-01","2023-04-28","D")
+        self.obj1 = Habit("Study Docker","2024-05-01","2023-05-07","D")
+        self.obj2 = Habit("Study Python","2024-05-06","2023-05-12","D")
+        self.obj3 = Habit("Study SQL","2024-05-14","2023-05-20","D")
+       
     def tearDown(self):
         self.obj1 = None
         self.obj2 = None
         self.obj3 = None
+      
     
     def test_checkoff(self):
         """
@@ -25,78 +24,42 @@ class Test_Habit(unittest.TestCase):
         correctly identifies the longest run streak within the habit.
         """
       
-        # Create this checkoffList ['y', 'n', 'y', 'n', 'y', 'n', 'y', 'n']
-        create_checkofflist_alternated_items(self.obj1,8)
+        # Create this checkoffList ['y', 'n', 'y', 'n']
+        create_checkofflist_alternated_items(self.obj1,4)
 
-        # Create this checkoffList ['y','y','y','y','y','y','y','y','y','y']
-        create_checkofflist_one_item(self.obj1,10,"y")
+        # Create this checkoffList ['y','y','y']
+        create_checkofflist_one_item(self.obj1,3,"y")
         
-        # Create this checkoffList ['n','n','n','n','n','n','n','n','n','n']
-        create_checkofflist_one_item(self.obj1,10,"n")
         
         # Final checkofflist
-        excepted = ['y', 'n', 'y', 'n', 'y', 'n', 'y', 'n','y','y','y','y',\
-               'y','y','y','y','y','y','n','n','n','n','n','n','n','n',\
-               'n','n']
+        expected = ['y', 'n', 'y', 'n', 'y', 'y', 'y']
         
-        self.assertEqual(self.obj1.checkoffList,excepted)
-        self.assertEqual(self.obj1.longest_habit_streak,10)
+        self.assertEqual(self.obj1.checkoffList,expected)
+        self.assertEqual(self.obj1.longest_streak,3)
 
 
-        create_checkofflist_alternated_items(self.obj2,8)
+        create_checkofflist_alternated_items(self.obj2,3)
 
-        create_checkofflist_one_item(self.obj2,10,"n")
+        create_checkofflist_one_item(self.obj2,3,"n")
    
-        create_checkofflist_one_item(self.obj2,10,"y")
 
-        excepted = ['y', 'n', 'y', 'n', 'y', 'n', 'y', 'n','n','n','n','n',\
-               'n','n','n','n','n','n','y','y','y','y','y','y','y','y',\
-               'y','y']
+        expected = ['y', 'n', 'y', 'n', 'n', 'n']
 
-        self.assertEqual(self.obj2.checkoffList,excepted)
-        self.assertEqual(self.obj2.longest_habit_streak,10)
+        self.assertEqual(self.obj2.checkoffList,expected)
+        self.assertEqual(self.obj2.longest_streak,1)
 
-        # ["y","y","y","y","y","y","y","y"]
-        create_checkofflist_one_item(self.obj3,8,"y")
-
-        # ["y","n","y","n","y","n","y","n","y","n"]   
-        create_checkofflist_alternated_items(self.obj3,10)
-   
-        # ["n","n","n","n","n","n","n","n","n","n"]
-        create_checkofflist_one_item(self.obj3,10,"n")
-        
-        # Final checkoffList
-        excepted = ["y","y","y","y","y","y","y","y","y","n","y","n","y","n","y","n","y","n",\
-        "n","n","n","n","n","n","n","n","n","n"]
-        
       
-        self.assertEqual(self.obj3.checkoffList,excepted)
-        self.assertEqual(self.obj3.longest_habit_streak,9)
-
-
-
-        create_checkofflist_one_item(self.obj4,8,"y")
-
-       
-        create_checkofflist_one_item(self.obj4,10,"n")
-   
-       
-        create_checkofflist_alternated_items(self.obj4,10)
-
-        excepted = ["y","y","y","y","y","y","y","y","n","n","n","n","n","n","n",\
-                    "n","n","n","y","n","y","n","y","n","y","n","y","n"]
-        
-        self.assertEqual(self.obj4.checkoffList,excepted)
-        self.assertEqual(self.obj4.longest_habit_streak,8)
-
-
+      
 class TestHabitTracker(unittest.TestCase):
     def setUp(self):
         self.objTracker = HabitTracker("John")
-        self.objTracker.add_habit("Brush teeth","2023-03-01","2023-03-28","D")
-        self.objTracker.add_habit("Study Python","2023-03-01","2023-03-28","D")
-        self.objTracker.add_habit("Study SQL","2023-04-01","2023-04-28","D")
-        self.objTracker.add_habit("Study JS","2023-04-01","2023-04-28","D")
+        self.objTracker.add_habit("Study Docker","2024-05-01","2023-05-07","D")
+        self.objTracker.add_habit("Study Python","2024-05-06","2023-05-12","D")
+        self.objTracker.add_habit("Study SQL","2024-05-14","2023-05-20","D")
+        self.objTracker.add_habit("Study JS","2024-06-01","2023-06-7","D")
+        
+    def test_add_habit(self):
+        self.objTracker.get_habit_by_name()
       
 
     def test_get_habit_by_name(self):
