@@ -96,7 +96,7 @@ To manage multiple habits in  the app, we introduced a `HabitTracker` container 
 * `tail`: Points to the last habit in the container object.
 * `next`: Pointer pointing to the next habit
 
-
+&nbsp;
 The HabitTracker operates as a linked list, with each habit object serving as a node. This structure enables efficient management of habits and supports various operations:
 
 * `Adding new habits`: Users can easily add new habits to the tracker.
