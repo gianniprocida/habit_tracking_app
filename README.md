@@ -75,19 +75,27 @@ For more information, please see the documentation or explore the source code or
 
 In our habit tracking app, a Habit object can represent a task that needs to be performed 
 regularly, such as studying a programming languages weekly or exercising daily. 
-The <span style="color: red;">Habit</span> object can have attributes like name of the habit, 
-start date, end date, frequency, checkofflist ( a list containing “y” or “n” to indicate 
-whether the habit was completed or not for a day), completed (whether the habit was 
-completed within the given period), and longest habit streak (the maximum number of times 
-the habit was completed in a row). 
+The `Habit` object is equipped with several attributes:
+
+```
+* `habit`: The name of the habit
+* `start`: The date when the habit starts.
+* `end`: The date when the habit ends
+* `freq`: How often the habit needs to be performed (e.g., daily, weekly).
+* `checkoffList`:  A list containing “y” or “n” to indicate 
+whether the habit was completed or not for a day.
+* `longest_habit_streak`: The maximum number of times 
+the habit was completed in a row
+* `completed`: Indicates if the habit was completed within the given period
+* `days_until_start`:  The number of days until the habit starts
+* `count_of_yes (int)`: The number of 'y' in the checkoffList ``
+```
+
+
+
 To manage multiple habits in  the app, we introduced a HabitTracker container object. This object encapsulates essential attributes such as user's name and a linked list of habits. This linked list serves as the backbone for organizing and manipulating the habits seamlessly. The HabitTracker enables users to perform various operations including adding new habits, deleting existing ones, retrieving habits by name or by id, and grouping habits based on specific attributes.
 However, users won't be able to add habits directly using the prepend and append methods, as the tracker needs to ensure that habits with earlier starting dates are placed at the beginning of the linked list, while habits with later starting dates are placed at the end. Allowing users to use prepend and append methods could disrupt this chronological order.
 
-```ruby
-require 'redcarpet'
-markdown = Redcarpet.new("Hello World!")
-puts markdown.to_html
-```
 Instead, the <span style="background-color: #FFFF00">Marked text</span> and <span style="color: red;">insert_habit</span> methods are to be used preserve the chronological order. These methods ensure that habits are inserted into the tracker in the correct order based on their starting dates. The attribute days_until_start is used to determine whether a habit starts sooner or later. It simply is the number of days between today and the starting date of a particular habit.
 
 Users can identify the habit with the longest run streak through this container. Each habit encapsulated within the linked list possess  checkoff method. This method facilitates users in marking habits as completed ('y') or incomplete ('n') at any juncture. However, the total number of marks cannot exceed the number of days in that period. If the maximum number of marks is reached, the method will stop adding additional marks to the checkofflist attribute. 

@@ -20,7 +20,9 @@ class Habit:
         checkoffList (lst): A list that contains "y" or "n" to indicate whether the habit was completed or not for a day.
         longest_habit_streak (int): The maximum number of times the habit was completed in a row.
         count_of_yes (int): The number of 'y' in the checkoffList 
-
+        days_until_start (int): used to determine whether a habit starts sooner or later. It simply is 
+        the number of days between today and the starting date of a particular habit.
+    
      Methods:
     __init__(self, name: str,start:str,end:str,freq:str) -> None
         Initializes a Habit object with the given name, starting date,end date and frequency.
