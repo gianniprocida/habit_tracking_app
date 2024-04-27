@@ -119,10 +119,6 @@ However, users won't be able to add habits directly using the `prepend` and `app
 
 Instead, the `add_habits` and `insert_habits` methods are to be used preserve the chronological order. These methods ensure that habits are inserted into the tracker in the correct order based on their starting dates.  The determination of the order is facilitated by the `days_until_start` attribute, which assesses whether a habit starts sooner or later
 
-Users can identify the habit with the longest run streak through this container. Each habit encapsulated within the linked list possess  checkoff method. This method facilitates users in marking habits as completed ('y') or incomplete ('n') at any juncture. However, the total number of marks cannot exceed the number of days in that period. If the maximum number of marks is reached, the method will stop adding additional marks to the checkofflist attribute. 
-
-
-
 
  The relationship between the two classes of objects in our tracking app can be described 
  using a UML class diagram. 
