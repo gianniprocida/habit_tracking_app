@@ -84,11 +84,10 @@ The `Habit` object is equipped with several attributes:
 * `checkoffList`:  A list containing “y” or “n” to indicate 
 whether the habit was completed or not for a day.
 * `longest_habit_streak`: The maximum number of times 
-the habit was completed in a row
-* `completed`: Indicates if the habit was completed within the given period
-* `days_until_start`:  The number of days until the habit starts
-* `count_of_yes (int)`: The number of 'y' in the checkoffList 
-
+the habit was completed in a row.
+* `completed`: Indicates if the habit was completed within the given period.
+* `days_until_start`:  The number of days until the habit starts.
+* `count_of_yes (int)`: The number of 'y' in the checkoffList.
 
 
 
