@@ -195,8 +195,9 @@ class HabitTracker:
         """
         tmp = self.head
         while tmp:
-            print(tmp.habit)
-            print(tmp.days_until_start)
+            print(" ")
+            print(f"Habit: {tmp.habit}")
+            print(f"Days until start: {tmp.days_until_start}")
             tmp = tmp.next
 
     def prepend_habit(self, name, start, end, freq):
@@ -224,13 +225,17 @@ class HabitTracker:
     def add_habit(self, name, start, end, freq):
         """
         Adds a new habit to the tracker, ensuring it is inserted in chronological order.
+        In the context of this tracker, "chronological order" signifies 
+        arranging habits with earlier start dates towards the beginning of the linked list.
 
         If the tracker is empty, the habit is prepended to the list.
         If the start date of the new habit is earlier than the start date of the first habit in the tracker and there is no conflict,
         the habit is prepended.
         If the start date of the new habit is later than the start date of the last habit in the tracker and there is no conflict,
         the habit is appended.
-        Otherwise, the habit is inserted at the appropriate position to maintain chronological order..
+        Otherwise, the habit is inserted at the appropriate position to maintain chronological order.
+
+
 
         Args:
            name (str): The name of the habit.
@@ -399,25 +404,89 @@ class HabitTracker:
     def reverse(self):
         pass
 
-    def longest_run_streak_of_all(self):
+    def get_habit_with_longest_run_streak_of_all(self):
         """
         Calculates the longest run streak of all habits in the tracker.
 
         Returns:
           A dictionary containing the name of the habit with the longest run streak and its corresponding streak length.
         """
-        longest_run_streak_of_all = 0
-        cur = 0
+        longest_run_streak_of_all = float('-inf')
         tmp = self.head
         while tmp:
-            cur = tmp.longest_streak
-            longest_run_streak_of_all = max(longest_run_streak_of_all, cur)
-            habit = tmp.habit
+            if tmp.longest_streak > longest_run_streak_of_all:
+                longest_run_streak_of_all = tmp.longest_streak
+                habit = tmp.habit
             tmp = tmp.next
         return {habit: longest_run_streak_of_all}
 
+    def find_duplicates(self):
+        """
+        Finds duplicate habits within the tracker.
+
+
+        Returns:
+           dict: A dictionary where keys are duplicate habit names and values are their corresponding indices in the linked list.
+        """
+        duplicates = {}
+        seen = {}
+        tmp = self.head
+        for i in range(self.length):
+            if tmp.habit not in seen:
+                seen[tmp.habit] = i
+            else:
+                duplicates[tmp.habit] = i
+            tmp = tmp.next
+
+        return duplicates
+
+    def select_habits_by_time_period(self, year, month):
+        """"
+        Selects habits whose start and end dates fall within the specified year and month.
+
+        Args:
+
+          year (str): The year of the time period.
+          month (str): The month of the time period.
+
+        Returns:
+          tuple: A tuple containing two dictionaries:
+             - The first dictionary maps time period to lists of habit names.
+             - The second dictionary maps time period to the count of habit completions.
+        """
+        selected_habits = {}
+        completion_count_by_month = {}
+        tmp = self.head
+        key = year + '-' + month
+        for i in range(self.length):
+            start_year = tmp.start.split('-')[0]
+            start_month = tmp.start.split('-')[1]
+            end_year = tmp.end.split('-')[0]
+            end_month = tmp.end.split('-')[1]
+            if year == start_year and year == end_year and month == start_month and month == end_month and key not in selected_habits:
+                selected_habits[key] = [tmp.habit]
+                completion_count_by_month[key] = tmp.y_count
+            elif year in tmp.start.split('-')[0] and month in tmp.start.split('-')[1] and key in selected_habits:
+                selected_habits[key].append(tmp.habit)
+                completion_count_by_month[key] += tmp.y_count
+            tmp = tmp.next
+        return selected_habits, completion_count_by_month
+
+    def remove_duplicates():
+        pass
+
 
 def no_conflict(habit1, habit2):
+    """
+    Checks if two habits have conflicting time periods.
+
+    Args:
+        habit1 (Habit): The first habit.
+        habit2 (Habit): The second habit.
+
+    Returns:
+        bool: True if there is no conflict between the time periods of the two habits, False otherwise.
+    """
     if habit1.start <= habit2.end and habit2.start <= habit1.end:
         return False
     return True
@@ -427,90 +496,36 @@ if __name__ == '__main__':
 
     tracker = HabitTracker("John")
 
-    tracker.add_habit("Study java", "2024-06-23", "2024-06-29", "D")
+    tracker.add_habit("Study java", "2025-06-23", "2025-06-29", "D")
 
-    tracker.add_habit("Study math", "2024-05-08", "2024-05-12", "D")
+    tracker.add_habit("Study math", "2025-05-08", "2025-05-12", "D")
 
-    tracker.add_habit("Study python", "2024-05-01", "2024-05-06", "D")
-    tracker.add_habit("Study SQL", "2024-04-25", "2024-04-30", "D")
+    tracker.add_habit("Study python", "2025-05-01", "2025-05-06", "D")
+    tracker.add_habit("Study SQL", "2025-04-26", "2025-04-30", "D")
 
-    tracker.add_habit("Study csharp", "2024-05-02", "2024-04-03", "D")
+    tracker.add_habit("Study csharp", "2025-05-02", "2024-05-03", "D")
+
+    tracker.add_habit("Study csharp", "2025-10-02", "2024-10-05", "D")
+    tracker.add_habit("Study csharp", "2024-04-28", "2024-04-30", "D")
 
     tracker.print_habits()
     print(" ")
-    tracker.checkoff_by_name("sql", "y")
-
+    tracker.checkoff_by_name("python", "y")
+    tracker.checkoff_by_name("python", "y")
+    tracker.checkoff_by_name("math", "y")
    # tracker.checkoff_by_name("sql", "y")
 
     sql = tracker.get_habit_by_id(0)
+
+    habit = tracker.get_habit_with_longest_run_streak_of_all()
+
+    print("find duplicates")
     
-    def is_linked_list_sorted(tracker):
-        slow = tracker.head 
-        fast = tracker.head 
-        
-        if tracker.length == 1:
-            return True
-        
-        while fast.next:
-          slow = fast
-          fast = slow.next
-      
-        if fast.days_until_start <= slow.days_until_start:
-         return False
-        return True
     
-    is_linked_list_sorted(tracker)
-        # print(tracker.length)
-
-    # a1 = tracker.get_habit(0)
-    # a2 = tracker.get_habit(1)
-
-    # a3 = tracker.get_habit(2)
-
-    # a4 = tracker.get_habit(3)
-
-    # new = Habit("Study c","2024-06-23","2024-07-01","D")
-
-    # tracker.add_habit("Study c", "2024-06-10", "2024-06-15", "D")
-
-    # tracker.insert(1, "Study kafka", "2024-05-05", "2024-04-07", "D")
-
-    # tracker.print_habits()
-
-    # tracker.prepend_habit("Study SQL","2024-04-18","2024-04-22","D")
-    # tracker.prepend_habit("Study Python","2024-04-23","2024-04-29","D")
-    # tracker.prepend_habit("Study OOP","2024-05-01","2024-05-22","D")
-
-    # # tracker.print_habits()
-
-    # a = tracker.get_habit(0)
-
-    # tracker.reverse()
-
-    # myhabit = tracker.get_habit_by_name("Study Python")
-
-    # print(myhabit.name)
-
-    # tracker.checkoff_by_name("Study Python","n")
-    # tracker.checkoff_by_name("Study Python","y")
-    # tracker.checkoff_by_name("Study Python","y")
-    # tracker.checkoff_by_name("Study Python","y")
-
-    # tracker.checkoff_by_name("Study SQL","n")
-    # tracker.checkoff_by_name("Study SQL","n")
-    # tracker.checkoff_by_name("Study SQL","y")
-    # tracker.checkoff_by_name("Study SQL","y")
-
-    # tracker.checkoff_by_name("Study OOP","n")
-    # tracker.checkoff_by_name("Study OOP","n")
-    # tracker.checkoff_by_name("Study OOP","y")
-    # tracker.checkoff_by_name("Study OOP","n")
-
-    # # Prints out {'Study Python':3}
-    # print(tracker.get_habit_with_longest_run_streak_of_all())
-
-    # # Prints out {'W':['Study SQL','Study Python','Study OOP']}
-    # print(tracker.get_habits_with_same_property("freq"))
-
-    # #{'2023-04-01-2023-04-22': ['Study SQL', 'Study Python'], '2023-05-01-2023-05-22': ['Study OOP']}
-    # print(tracker.get_habits_with_same_property("time_period_string"))
+    output = tracker.find_duplicates()
+    
+    print(output)
+    print("Execute select habuts by time period")
+    print(" ")
+    out =tracker.select_habits_by_time_period("2025", "05")
+    print(out)

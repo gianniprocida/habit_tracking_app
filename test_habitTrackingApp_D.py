@@ -70,8 +70,8 @@ class TestHabitTracker(unittest.TestCase):
     def setUp(self):
         self.objTracker = HabitTracker("John")
         self.objTracker.add_habit("Study git","2025-07-22","2025-07-25","D")
-        self.objTracker.add_habit("Study nosql","2025-07-14","2025-07-14","D")
-        self.objTracker.add_habit("Study java","2025-08-14","2025-05-20","D")
+        self.objTracker.add_habit("Study nosql","2025-07-14","2025-07-21","D")
+        self.objTracker.add_habit("Study java","2025-08-14","2025-08-20","D")
         self.objTracker.add_habit("Study mongodb","2025-08-01","2025-08-07","D")
         
     def test_add_habit(self):
@@ -104,86 +104,66 @@ class TestHabitTracker(unittest.TestCase):
 
 
 
-#     def test_longest_run_streak_of_all(self):
-#         """This test case checks whether the checkoff method correctly updates a task's completion status for the 
-#         a day in the context of a HabitTracker object. It then checks whether the 
-#         get_longest_run_streak_of_all function correctly calculates the longest run streak for a set of habits 
-#         defined in the setUp method
-#         """
+    def test_longest_run_streak_of_all(self):
+        """This test case checks whether the checkoff method correctly updates a task's completion status for the 
+        a day in the context of a HabitTracker object. It then checks whether the 
+        get_longest_run_streak_of_all function correctly calculates the longest run streak for a set of habits 
+        defined in the setUp method
+        """
 
-#         create_checkofflist_alternated_items(self.objTracker,8,"Brush teeth")
+        create_checkofflist_alternated_items(self.objTracker,3,"Study java")
 
-#         create_checkofflist_one_item(self.objTracker,10,"y","Brush teeth")
-   
-#         create_checkofflist_one_item(self.objTracker,10,"n","Brush teeth")
+        create_checkofflist_one_item(self.objTracker,3,"y","Study java")
 
-#         excepted = ['y', 'n', 'y', 'n', 'y', 'n', 'y', 'n','y','y','y','y',\
-#                'y','y','y','y','y','y','n','n','n','n','n','n','n','n',\
-#                'n','n']
+        expected = ['y','n','y','y', 'y', 'y']
 
-#         h = self.objTracker.get_habit_by_name("Brush teeth")
+        java = self.objTracker.get_habit_by_name("Study java")
 
-#         self.assertEqual(h.checkoffList,excepted)
-#         self.assertEqual(h.longest_habit_streak,10)
-
-
-
-
-#         create_checkofflist_alternated_items(self.objTracker,8,"Study Python")
-
-#         create_checkofflist_one_item(self.objTracker,10,"n","Study Python")
-   
-#         create_checkofflist_one_item(self.objTracker,10,"y","Study Python")
-
-#         excepted = ['y', 'n', 'y', 'n', 'y', 'n', 'y', 'n','n','n','n','n',\
-#                'n','n','n','n','n','n','y','y','y','y','y','y','y','y',\
-#                'y','y']
+        self.assertEqual(java.checkoffList,expected)
+        self.assertEqual(java.longest_streak,4)
         
-#         h = self.objTracker.get_habit_by_name("Study Python")
-
-#         self.assertEqual(h.checkoffList,excepted)
-
-#         self.assertEqual(h.longest_habit_streak,10)
+        print(java.longest_streak,java.habit)
 
 
+        create_checkofflist_alternated_items(self.objTracker,4,"Study mongodb")
 
-#         create_checkofflist_one_item(self.objTracker,8,"y","Study SQL")
+        create_checkofflist_one_item(self.objTracker,2,"n","Study mongodb")
+   
+
+        expected = ['y', 'n', 'y', 'n', 'n', 'n']
+        
+        mongodb = self.objTracker.get_habit_by_name("Study mongodb")
+
+        self.assertEqual(mongodb.checkoffList,expected)
+
+        self.assertEqual(mongodb.longest_streak,1)
+
+
+        print("hello,there ")
+        
+        print(mongodb.longest_streak,java.longest_streak)
+        create_checkofflist_one_item(self.objTracker,4,"y","Study nosql")
 
        
-#         create_checkofflist_alternated_items(self.objTracker,10,"Study SQL")
+        create_checkofflist_alternated_items(self.objTracker,3,"Study nosql")
    
-    
-#         create_checkofflist_one_item(self.objTracker,10,"n","Study SQL")
 
-#         excepted = ["y","y","y","y","y","y","y","y","y","n","y","n","y","n","y","n","y","n",\
-#         "n","n","n","n","n","n","n","n","n","n"]
+        expected = ["y","y","y","y","y","n","y"]
         
-#         h = self.objTracker.get_habit_by_name("Study SQL")
+        nosql = self.objTracker.get_habit_by_name("Study nosql")
       
-#         self.assertEqual(h.checkoffList,excepted)
-#         self.assertEqual(h.longest_habit_streak,9)
+        self.assertEqual(nosql.checkoffList,expected)
+        self.assertEqual(nosql.longest_streak,5)
 
+        print("hello")
+        print(nosql.longest_streak,java.longest_streak,mongodb.longest_streak)
 
-#         create_checkofflist_one_item(self.objTracker,8,"y","Study JS")
-
+        myhabit = self.objTracker.get_habit_with_longest_run_streak_of_all()
         
-#         create_checkofflist_one_item(self.objTracker,10,"n","Study JS")
-   
-
-#         create_checkofflist_alternated_items(self.objTracker,10,"Study JS")
-
-#         excepted = ["y","y","y","y","y","y","y","y","n","n","n","n","n","n","n",\
-#                     "n","n","n","y","n","y","n","y","n","y","n","y","n"]
-        
-#         h = self.objTracker.get_habit_by_name("Study JS")
-
-#         self.assertEqual(h.checkoffList,excepted)
-#         self.assertEqual(h.longest_habit_streak,8)
-
-#         h = self.objTracker.get_habit_with_longest_run_streak_of_all()
+      
     
-       
-#         self.assertEqual({"Brush teeth":10},h)
+        
+        self.assertEqual({"Study nosql":5},myhabit)
 
 #     def test_delete_habit(self):
 #         """This test case checks whether the delete_habit method correctly deletes a habit in the context of a

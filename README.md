@@ -6,8 +6,7 @@
 <body>
 <h1>Overview</h1>
 <hr>
-<p>Habit tracking app that allows users to track their daily and weekly habits and 
-      monitor their progress over time. </a></p>
+<p>The HabitTracker is a tool that helps you stay organized by keeping track of your daily habit you want to do regularly, like exercising or reading, by storing them in a list. This list is arranged in the order they're supposed to happen, with the earliest habits at the top and the later ones below. You can mark off each habit as you complete it, and the tracker keeps count of how many times you've done each one. It's like having a personal assistant to help you stay on top of your goals!. </a></p>
 <h2>Getting started</h2>
 
 Before using the Habit Tracking App make sure you have Python3.8 installed on your computer.
@@ -73,21 +72,24 @@ These are just a few examples of the functionality of this habit tracking app.
 For more information, please see the documentation or explore the source code or check the reflection phase.
 <h2>Conception phase</h2>
 
+
 In our habit tracking app, a Habit object can represent a task that needs to be performed 
 regularly, such as studying a programming languages weekly or exercising daily. 
 The <span style="color: red;">Habit</span> object can have attributes like name of the habit, 
 start date, end date, frequency, checkofflist ( a list containing “y” or “n” to indicate 
-whether the habit was completed or not for a day), ID, completed (whether the habit was 
+whether the habit was completed or not for a day), completed (whether the habit was 
 completed within the given period), and longest habit streak (the maximum number of times 
-the habit was completed in a row). To manage multiple habits in  the app, we can create a 
-HabitTracker container object that 
-has attributes like user name and a list of habits. This will make it easier to add new
- habits, delete habits, retrieve habits by name, retrieve habits by id or group habits by 
- specific attribues, and find the habit with the longest run streak. Moreover, 
- the Habit object includes a checkoff method that 
- allows users to mark the habit as completed (“y” or “n”) at any point in time. However, the total number of marks cannot 
- exceed the number of days in that period. If the maximum number of marks is reached, the 
- method will stop adding additional marks to the checkofflist attribute.
+the habit was completed in a row). 
+To manage multiple habits in  the app, we introduced a HabitTracker container object. This object encapsulates essential attributes such as user's name and a linked list of habits. This linked list serves as the backbone for organizing and manipulating the habits seamlessly. The HabitTracker enables users to perform various operations including adding new habits, deleting existing ones, retrieving habits by name or by id, and grouping habits based on specific attributes.
+However, users won't be able to add habits directly using the prepend and append methods, as the tracker needs to ensure that habits with earlier starting dates are placed at the beginning of the linked list, while habits with later starting dates are placed at the end. Allowing users to use prepend and append methods could disrupt this chronological order.
+
+Instead, the add_habit and insert_habit methods are provided to preserve the chronological order. These methods ensure that habits are inserted into the tracker in the correct order based on their starting dates. The attribute days_until_start is used to determine whether a habit starts sooner or later. It simply is the number of days between today and the starting date of a particular habit.
+
+ Additionally, users can identify the habit with the longest run streak through this container. Each habit encapsulated within the linked list possess  checkoff method. This method facilitates users in marking habits as completed ('y') or incomplete ('n') at any juncture. However, the total number of marks cannot exceed the number of days in that period. If the maximum number of marks is reached, the method will stop adding additional marks to the checkofflist attribute. 
+
+
+
+
  The relationship between the two classes of objects in our tracking app can be described 
  using a UML class diagram. 
  This UML diagram provides a visual representation of the 
