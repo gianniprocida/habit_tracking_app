@@ -77,8 +77,6 @@ In our habit tracking app, a Habit object can represent a task that needs to be 
 regularly, such as studying a programming languages weekly or exercising daily. 
 The `Habit` object is equipped with several attributes:
 
-```
-
 * `habit`: The name of the habit
 * `start`: The date when the habit starts.
 * `end`: The date when the habit ends
@@ -91,7 +89,6 @@ the habit was completed in a row
 * `days_until_start`:  The number of days until the habit starts
 * `count_of_yes (int)`: The number of 'y' in the checkoffList 
 
-```
 
 
 
