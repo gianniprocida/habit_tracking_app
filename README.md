@@ -78,6 +78,7 @@ regularly, such as studying a programming languages weekly or exercising daily.
 The `Habit` object is equipped with several attributes:
 
 ```
+
 * `habit`: The name of the habit
 * `start`: The date when the habit starts.
 * `end`: The date when the habit ends
@@ -88,7 +89,8 @@ whether the habit was completed or not for a day.
 the habit was completed in a row
 * `completed`: Indicates if the habit was completed within the given period
 * `days_until_start`:  The number of days until the habit starts
-* `count_of_yes (int)`: The number of 'y' in the checkoffList ``
+* `count_of_yes (int)`: The number of 'y' in the checkoffList 
+
 ```
 
 
