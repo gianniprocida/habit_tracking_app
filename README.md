@@ -88,14 +88,14 @@ the habit was completed in a row.
 * `completed`: Indicates if the habit was completed within the given period.
 * `days_until_start`:  The number of days until the habit starts.
 * `count_of_yes (int)`: The number of 'y' in the checkoffList.
-
+<br/><br/> 
 To manage multiple habits in  the app, we introduced a `HabitTracker` container object. This object serves as a central hub for organizing and manipulating habits seamlessly. Let's dive into its key components:
 
 * `User`: Identifies the user associated with the habits
 * `head`: Points to the first habit in the container object
 * `tail`: Points to the last habit in the container object.
 * `next`: Pointer pointing to the next habit
-<br/><br/> 
+
 The HabitTracker operates as a linked list, with each habit object serving as a node. This structure enables efficient management of habits and supports various operations:
 
 * `Adding new habits`: Users can easily add new habits to the tracker.
