@@ -89,13 +89,11 @@ the habit was completed in a row.
 * `days_until_start`:  The number of days until the habit starts.
 * `count_of_yes (int)`: The number of 'y' in the checkoffList.
 
-
-
 To manage multiple habits in  the app, we introduced a `HabitTracker` container object. This object serves as a central hub for organizing and manipulating habits seamlessly. Let's dive into its key components:
 
 * `User`: Identifies the user associated with the habits
 * `head`: Points to the first habit in the container object
-* `tail`: The date when the habit ends
+* `tail`: Points to the last habit in the container object.
 * `next`: Pointer pointing to the next habit
 * `checkoffList`:  A list containing “y” or “n” to indicate 
 whether the habit was completed or not for a day.
@@ -105,7 +103,6 @@ the habit was completed in a row.
 * `days_until_start`:  The number of days until the habit starts.
 * `count_of_yes (int)`: The number of 'y' in the checkoffList.
 
-
 The HabitTracker operates as a linked list, with each habit object serving as a node. This structure enables efficient management of habits and supports various operations:
 
 * `Adding new habits`: Users can easily add new habits to the tracker.
@@ -114,7 +111,6 @@ The HabitTracker operates as a linked list, with each habit object serving as a 
 * `Grouping habit`: Habits can be grouped based on specific attributes.
 
 
- 
 However, users won't be able to add habits directly using the `prepend` and `append` methods, as the tracker needs to ensure that habits with earlier starting dates are placed at the beginning of the linked list, while habits with later starting dates are placed at the end. Allowing users to use prepend and append methods could disrupt this chronological order.
 
 Instead, the `add_habits` and `insert_habits` methods are to be used preserve the chronological order. These methods ensure that habits are inserted into the tracker in the correct order based on their starting dates.  The determination of the order is facilitated by the `days_until_start` attribute, which assesses whether a habit starts sooner or later
