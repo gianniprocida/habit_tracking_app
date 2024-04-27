@@ -88,7 +88,7 @@ require 'redcarpet'
 markdown = Redcarpet.new("Hello World!")
 puts markdown.to_html
 ```
-Instead, the *add_habit** and <span style="color: red;">insert_habit</span> methods are to be used preserve the chronological order. These methods ensure that habits are inserted into the tracker in the correct order based on their starting dates. The attribute days_until_start is used to determine whether a habit starts sooner or later. It simply is the number of days between today and the starting date of a particular habit.
+Instead, the <span style="background-color: #FFFF00">Marked text</span> and <span style="color: red;">insert_habit</span> methods are to be used preserve the chronological order. These methods ensure that habits are inserted into the tracker in the correct order based on their starting dates. The attribute days_until_start is used to determine whether a habit starts sooner or later. It simply is the number of days between today and the starting date of a particular habit.
 
 Users can identify the habit with the longest run streak through this container. Each habit encapsulated within the linked list possess  checkoff method. This method facilitates users in marking habits as completed ('y') or incomplete ('n') at any juncture. However, the total number of marks cannot exceed the number of days in that period. If the maximum number of marks is reached, the method will stop adding additional marks to the checkofflist attribute. 
 
