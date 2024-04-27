@@ -91,10 +91,33 @@ the habit was completed in a row.
 
 
 
-To manage multiple habits in  the app, we introduced a HabitTracker container object. This object encapsulates essential attributes such as user's name and a linked list of habits. This linked list serves as the backbone for organizing and manipulating the habits seamlessly. The HabitTracker enables users to perform various operations including adding new habits, deleting existing ones, retrieving habits by name or by id, and grouping habits based on specific attributes.
-However, users won't be able to add habits directly using the prepend and append methods, as the tracker needs to ensure that habits with earlier starting dates are placed at the beginning of the linked list, while habits with later starting dates are placed at the end. Allowing users to use prepend and append methods could disrupt this chronological order.
+To manage multiple habits in  the app, we introduced a `HabitTracker` container object. This object serves as a central hub for organizing and manipulating habits seamlessly. Let's dive into its key components:
 
-Instead, the <span style="background-color: #FFFF00">Marked text</span> and <span style="color: red;">insert_habit</span> methods are to be used preserve the chronological order. These methods ensure that habits are inserted into the tracker in the correct order based on their starting dates. The attribute days_until_start is used to determine whether a habit starts sooner or later. It simply is the number of days between today and the starting date of a particular habit.
+* `User`: Identifies the user associated with the habits
+* `head`: Points to the first habit in the container object
+* `tail`: The date when the habit ends
+* `next`: Pointer pointing to the next habit
+* `checkoffList`:  A list containing “y” or “n” to indicate 
+whether the habit was completed or not for a day.
+* `longest_habit_streak`: The maximum number of times 
+the habit was completed in a row.
+* `completed`: Indicates if the habit was completed within the given period.
+* `days_until_start`:  The number of days until the habit starts.
+* `count_of_yes (int)`: The number of 'y' in the checkoffList.
+
+
+The HabitTracker operates as a linked list, with each habit object serving as a node. This structure enables efficient management of habits and supports various operations:
+
+* `Adding new habits`: Users can easily add new habits to the tracker.
+* `Deleting existing habits`: Unwanted habits can be removed from the tracker.
+* `Retrieving habits`: Users can retrieve habits by name or by ID.
+* `Grouping habit`: Habits can be grouped based on specific attributes.
+
+
+ 
+However, users won't be able to add habits directly using the `prepend` and `append` methods, as the tracker needs to ensure that habits with earlier starting dates are placed at the beginning of the linked list, while habits with later starting dates are placed at the end. Allowing users to use prepend and append methods could disrupt this chronological order.
+
+Instead, the `add_habits` and `insert_habits` methods are to be used preserve the chronological order. These methods ensure that habits are inserted into the tracker in the correct order based on their starting dates.  The determination of the order is facilitated by the `days_until_start` attribute, which assesses whether a habit starts sooner or later
 
 Users can identify the habit with the longest run streak through this container. Each habit encapsulated within the linked list possess  checkoff method. This method facilitates users in marking habits as completed ('y') or incomplete ('n') at any juncture. However, the total number of marks cannot exceed the number of days in that period. If the maximum number of marks is reached, the method will stop adding additional marks to the checkofflist attribute. 
 
