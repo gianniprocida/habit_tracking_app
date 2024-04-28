@@ -34,20 +34,41 @@ source myvenv/bin/activate
 
 After activation, you'll notice (myvenv) in your terminal prompt, indicating that the virtual environment is active.
  
- 
 
-If we check the contents of env for a bit, on a Mac you will see a bin folder. You will also see scripts that are typically 
-used to control your virtual environment, such as activate and pip to install libraries, and the Python interpreter for the Python version you installed, and so on.
- 3) source myenv/bin/activate 
+4. Check Installed Packages
 
- First we check the list of packages installed in our virtual 
- environment by running the code below in the activated virtual environment
+While the virtual environment is activated, you can check the list of installed packages using:
 
- pip list
+```
+pip list
+```
 
- upgrade pip if necessary
+5. Upgrade Pip (if necessary)
+This ensures that you have the latest version of pip installed in your virtual environment.
 
- 
+6. Run the Application and the Unit Test
+With the virtual environment activated and necessary packages installed, you can now run your Python application locally.
+```
+python3 habit_tracking_app.py
+```
+
+and 
+
+```
+python3.8 -m unittest test_habitTrackingApp_D.py
+```
+
+7. Deactivate the Virtual Environment
+
+Once you're done working with the application, you can deactivate the virtual environment using the command:
+
+```
+deactivate
+```
+This returns you to the global Python environment.
+
+
+
 
 
 These are just a few examples of the functionality of this habit tracking app. 
