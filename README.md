@@ -54,7 +54,7 @@ This ensures that you have the latest version of pip installed in your virtual e
 
 6. Run the Application and the Unit Test.
 
-With the virtual environment activated and necessary packages installed, you can now run your application and unit testlocally.
+With the virtual environment activated and necessary packages installed, you can now run your application and unit test locally.
 
 ```
 python3 habit_tracking_app.py
@@ -109,8 +109,8 @@ The HabitTracker operates as a linked list, with each habit object serving as a 
 * `Retrieving habits`: Users can retrieve habits by name or by ID.
 * `Grouping habit`: Habits can be grouped based on specific attributes.
 <br/><br/> 
-However, users won't be able to add habits directly using the `prepend` and `append` methods, as the tracker needs to ensure that habits with earlier starting dates are placed at the beginning of the linked list, while habits with later starting dates are placed at the end. Allowing users to use prepend and append methods could disrupt this chronological order.
-Instead, the `add_habits` and `insert_habits` methods are to be used preserve the chronological order. These methods ensure that habits are inserted into the tracker in the correct order based on their starting dates.  The determination of the order is facilitated by the `days_until_start` attribute, which assesses whether a habit starts sooner or later. The relationship between the two classes of objects in our tracking app can be described  using a UML class diagram. This UML diagram provides a visual representation of the  one-to-many relationship between the Habit and HabitTracker classes, with one HabitTracker having zero or more Habit objects associated with it. 
+However, users won't be able to add habits directly using the `prepend` and `append` methods, as the tracker needs to ensure that habits with earlier starting dates are placed at the beginning of the linked list, while habits with later starting dates are placed at the end. These methods are kept private to prevent disruption of the established order.
+Instead, the `add_habits` and `insert_habits` methods are to be used to preserve the chronological order. These methods ensure that habits are inserted into the tracker in the correct order based on their starting dates.  The determination of the order is facilitated by the `days_until_start` attribute, which assesses whether a habit starts sooner or later. The relationship between the two classes of objects in our tracking app can be described  using a UML class diagram. This UML diagram provides a visual representation of the  one-to-many relationship between the Habit and HabitTracker classes, with one HabitTracker having zero or more Habit objects associated with it. 
 <img src="uml_diagr.png" alt="Description of the image">
  
 To interact with these objects, we can create a menu-based interface that allows users to carry out the aforementioned actions, including listing all the habits stored in the HabitTracker container object. The interface will provide users with a user-friendly approach to managing theirs habits and monitoring their advancement towards completing them.  It's also worth noting the type of relationship between the Menu class and the HabitTracker class. The Menu class and the HabitTracker class are in a "part-of" relationship because the HabitTracker class is a part of the Menu class object. While the HabitTracker class object has its own implementation, its object is created only after the Menu class object is created.
