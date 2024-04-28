@@ -1,76 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-</head>
-<body>
-<h1>Overview</h1>
-<hr>
-<p>The HabitTracker is a tool that helps you stay organized by keeping track of your daily habit you want to do regularly, like exercising or reading, by storing them in a list. This list is arranged in the order they're supposed to happen, with the earliest habits at the top and the later ones below. You can mark off each habit as you complete it, and the tracker keeps count of how many times you've done each one. It's like having a personal assistant to help you stay on top of your goals!. </a></p>
-<h2>Getting started</h2>
 
-Before using the Habit Tracking App make sure you have Python3.8 installed on your computer.
-<h3>How to run it?</h3>
-     <ul>
-      <li>Clone the repository from GitHub: git clone https://github.com/gianniprocida/habit_tracking_app.git</li>
-      <li>Navigate to the habit-tracker directory: cd habit-tracking_app</li>
-      <li>Install any dependencies required by the project:
-        <ul>
-          <li>pandas,matplotlib</li>
-        </ul>
-      </li>   
-      <li>Run the project by executing the menu Python file: python3.8 menu.py</li>
-      This should start the habit tracking program and allow you to interact with it via the user interface provided by the project.
-    <ul>
-  <h3>How to run unittests script</h3>
-  <ul>
-  <li> To execute tests for daily habits in the habit tracking app, run the script test_habitTrackingApp_D.py using the following command: python3.8 -m unittest test_habitTrackingApp_D.py. For weekly habits, use the script test_habitTrackingApp_W.py instead.</li>
-<li> To execute tests for the function get_habit_by_id in the habit tracking app, run the script test_get_habit_by_id.py using the following command: python3.8 -m unittest test_get_habit_by_id.</li>
-<h2>Features</h2>
-<h3>Create new habits</h3>
-To start tracking habits, you need to create a HabitTracker instance by providing the name of the user. Then we pass in the name of the habit,"Study OOP", the start date of the habit period,`2023-04-01`, the end date of the habit period,"2023-04-28", and the frequency,'D'.
+# Habit Tracking app
+## Overview 
+The HabitTracker is a tool that helps you stay organized by keeping track of your daily habit you want to do regularly, like exercising or reading, by storing them in a list.
+## Run the app locally
+
+
+To set up and run the application locally, follow these steps:
+
+1. Install Virtual Environment
+
+Virtualenv is a tool used to set up isolated Python environments. To install it, run the following command:
 
 ```
-tracker = HabitTracker("John")
-tracker.add_habit("Study SQL","2023-04-01","2023-04-22","W")
-tracker.add_habit("Study Python","2023-04-01","2023-04-22","W")
+pip install virtualenv
 ```
 
-<h3>Delete a habit</h3>
-We call the `delete_habit` method on the HabitTracking class and pass in the name of the habit we want to delete.
-This will remove the habit with the name "Study Python" from the tracker object.
+2. Create a virtual environment using the venv module. Replace myvenv with your preferred name for the environment:
 
 ```
-tracker.delete_habit("Study Python")
+python3 -m venv myvenv
 ```
 
-<h3>Get habit by name</h3>
-We call the `get_habit_by_name` method on the HabitTracker class and pass in the 
-name of the habit we want to retrieve. This will return a `Habit' instance with the specified name.
+This command creates a new folder named myvenv, which contains the isolated environment.
 
+3. Activate the Virtual Environment
+
+Activate the virtual environment using the appropriate command for your operating system:
+
+On macOS/Linux:
 ```
-myhabit = tracker.get_habit_by_name("Study Python")
+source myvenv/bin/activate 
 ```
 
-<h3>Get habit by id</h3>
-We call the `get_habit_by_name` method on the HabitTracker class and pass in the id of
-the habit we want to retrieve. This will return a `Habit' instance with the specified id.
+After activation, you'll notice (myvenv) in your terminal prompt, indicating that the virtual environment is active.
+ 
+ 
 
-```
-myhabit = tracker.get_habit_by_id(1)
-```
-This will return the first habit that was added to our tracker.
-<h3>Check off by name</h3>
-We call the `checkoff_by_name` method on the HabitTracker class and pass in the name of the habit we want to check off. This 
-will add the string "y" to the checkoffList of the `Habit` instance with the specified name.
+If we check the contents of env for a bit, on a Mac you will see a bin folder. You will also see scripts that are typically 
+used to control your virtual environment, such as activate and pip to install libraries, and the Python interpreter for the Python version you installed, and so on.
+ 3) source myenv/bin/activate 
 
-```
-tracker.checkoff_by_name("Study Python","y")
-tracker.checkoff_by_name("Study SQL","y")
-```
+ First we check the list of packages installed in our virtual 
+ environment by running the code below in the activated virtual environment
+
+ pip list
+
+ upgrade pip if necessary
+
+ 
+
+
 These are just a few examples of the functionality of this habit tracking app. 
 For more information, please see the documentation or explore the source code or check the reflection phase.
-<h2>Conception phase</h2>
+## Conception phase
 
 
 In our habit tracking app, a Habit object can represent a task that needs to be performed 
