@@ -12,7 +12,7 @@ To set up and run the application locally, follow these steps:
 Virtualenv is a tool used to set up isolated Python environments. To install it, run the following command:
 
 ```
-pip install virtualenv.
+pip install virtualenv
 ```
 
 2. Create a virtual environment using the venv module. Replace myvenv with your preferred name for the environment:
@@ -71,13 +71,28 @@ deactivate
 This returns you to the global Python environment.
 
 
+Note: This usage of a container is not ideal. Containers are intended to be long-lived, hosting services or applications that run continuously. Ideally, the habit tracking app should be expanded with Flask to create a full-fledged web application with a rich user interface. This web application can then be shipped in a long-lived container.
 
 
+## Run the app using Docker
 
-These are just a few examples of the functionality of this habit tracking app. 
-For more information, please see the documentation or explore the source code or check the reflection phase.
+To set up and run the application using Docker , follow these steps:
+
+1. Build a Docker image named `habit-tracking-app` using the instructions in the Dockerfile located in current directory. 
+
+```
+docker build -f Dockerfile -t habit-tracking-app .
+```
+
+2. Create a container named `myapp` on the habit-tracking-app Docker image.
+
+```
+docker run --name myapp habit-tracking-app   
+```
+ 
+Please note that our habit_tracking_app.py script is not designed to run continuously (e.g., as a web server). Therefore, once you run the command above, the output of the script will be printed on your screen, and the container will exit.
+
 ## Conception phase
-
 
 In our habit tracking app, a Habit object can represent a task that needs to be performed 
 regularly, such as studying a programming languages weekly or exercising daily. 
