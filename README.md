@@ -7,12 +7,12 @@ The HabitTracker is a tool that helps you stay organized by keeping track of you
 
 To set up and run the application locally, follow these steps:
 
-1. Install Virtual Environment
+1. Install Virtual Environment.
 
 Virtualenv is a tool used to set up isolated Python environments. To install it, run the following command:
 
 ```
-pip install virtualenv
+pip install virtualenv.
 ```
 
 2. Create a virtual environment using the venv module. Replace myvenv with your preferred name for the environment:
@@ -23,7 +23,7 @@ python3 -m venv myvenv
 
 This command creates a new folder named myvenv, which contains the isolated environment.
 
-3. Activate the Virtual Environment
+3. Activate the Virtual Environment.
 
 Activate the virtual environment using the appropriate command for your operating system:
 
@@ -35,27 +35,30 @@ source myvenv/bin/activate
 After activation, you'll notice (myvenv) in your terminal prompt, indicating that the virtual environment is active.
  
 
-4. Check Installed Packages
+4. Check Installed Packages.
 
 While the virtual environment is activated, you can check the list of installed packages using:
 
 ```
 pip list
 ```
+5. Install Required Python Packages.
 
-5. Upgrade Pip (if necessary)
+```
+pip install matplotlib
+pip install pandas
+```
+5. Upgrade Pip (if necessary).
+
 This ensures that you have the latest version of pip installed in your virtual environment.
 
-6. Run the Application and the Unit Test
-With the virtual environment activated and necessary packages installed, you can now run your Python application locally.
+6. Run the Application and the Unit Test.
+
+With the virtual environment activated and necessary packages installed, you can now run your application and unit testlocally.
+
 ```
 python3 habit_tracking_app.py
-```
-
-and 
-
-```
-python3.8 -m unittest test_habitTrackingApp_D.py
+python3 -m unittest test_habitTrackingApp_D.py
 ```
 
 7. Deactivate the Virtual Environment
