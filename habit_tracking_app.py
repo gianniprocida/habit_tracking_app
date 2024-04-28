@@ -536,5 +536,3 @@ if __name__ == '__main__':
     print("Let's run the method 'select_habits_by_time_period' on the tracker object!")
     out =tracker.select_habits_by_time_period("2025", "05")
     print(out)
-  
-    tracker.__prepend_habit("Study c", "2024-07-28", "2024-07-30", "D")

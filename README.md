@@ -71,10 +71,10 @@ deactivate
 This returns you to the global Python environment.
 
 
-Note: This usage of a container is not ideal. Containers are intended to be long-lived, hosting services or applications that run continuously. Ideally, the habit tracking app should be expanded with Flask to create a full-fledged web application with a rich user interface. This web application can then be shipped in a long-lived container.
-
 
 ## Run the app using Docker
+
+Note: This usage of a container is not ideal. Containers are intended to be long-lived, hosting services or applications that run continuously. Ideally, the habit tracking app should be expanded with Flask to create a full-fledged web application with a rich user interface. This web application can then be shipped in a long-lived container.
 
 To set up and run the application using Docker , follow these steps:
 
