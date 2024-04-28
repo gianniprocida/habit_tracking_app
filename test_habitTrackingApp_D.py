@@ -155,7 +155,6 @@ class TestHabitTracker(unittest.TestCase):
         self.assertEqual(nosql.checkoffList,expected)
         self.assertEqual(nosql.longest_streak,5)
 
-        print("hello")
         print(nosql.longest_streak,java.longest_streak,mongodb.longest_streak)
 
         myhabit = self.objTracker.get_habit_with_longest_run_streak_of_all()

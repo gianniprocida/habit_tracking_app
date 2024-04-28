@@ -168,7 +168,7 @@ class HabitTracker:
         self.tail = None
         self.length = 0
 
-    def append(self, name, start, end, freq):
+    def __append(self, name, start, end, freq):
         """
         Adds a new habit to the end of the tracker.
 
@@ -202,7 +202,7 @@ class HabitTracker:
             print(f"Days until start: {tmp.days_until_start}")
             tmp = tmp.next
 
-    def prepend_habit(self, name, start, end, freq):
+    def __prepend_habit(self, name, start, end, freq):
         """Adds a habit to the Tracker object.
 
         Args:
@@ -250,13 +250,13 @@ class HabitTracker:
         """
         new_habit = Habit(name, start, end, freq)
         if self.length == 0:
-            self.prepend_habit(name, start, end, freq)
+            self.__prepend_habit(name, start, end, freq)
             return
         elif new_habit.days_until_start < self.head.days_until_start and no_conflict(self.head, new_habit):
-            self.prepend_habit(name, start, end, freq)
+            self.__prepend_habit(name, start, end, freq)
             return
         elif new_habit.days_until_start > self.tail.days_until_start and no_conflict(self.head, new_habit):
-            self.append(name, start, end, freq)
+            self.__append(name, start, end, freq)
             return
 
         fast = self.head
@@ -362,10 +362,10 @@ class HabitTracker:
             return None
         if index == 0:
             if new_habit.days_until_start < self.head.days_until_start:
-                return self.prepend_habit(name, start, end, freq)
+                return self.__prepend_habit(name, start, end, freq)
         if index == self.length:
             if new_habit.days_until_start < self.tail.days_until_start:
-                return self.append(name, start, end, freq)
+                return self.__append(name, start, end, freq)
 
         tmp = self.get_habit_by_id(index - 1)
 
@@ -501,12 +501,9 @@ if __name__ == '__main__':
     tracker.add_habit("Study java", "2025-06-23", "2025-06-29", "D")
 
     tracker.add_habit("Study math", "2025-05-08", "2025-05-12", "D")
-
     tracker.add_habit("Study python", "2025-05-01", "2025-05-06", "D")
     tracker.add_habit("Study SQL", "2025-04-26", "2025-04-30", "D")
-
     tracker.add_habit("Study csharp", "2025-05-02", "2024-05-03", "D")
-
     tracker.add_habit("Study csharp", "2025-10-02", "2024-10-05", "D")
     tracker.add_habit("Study csharp", "2024-04-28", "2024-04-30", "D")
 
@@ -515,19 +512,29 @@ if __name__ == '__main__':
     tracker.checkoff_by_name("python", "y")
     tracker.checkoff_by_name("python", "y")
     tracker.checkoff_by_name("math", "y")
-   # tracker.checkoff_by_name("sql", "y")
+    
+    print("Let's run the method 'get_habit_by_id' on the tracker object!")
 
     sql = tracker.get_habit_by_id(0)
-
-    habit = tracker.get_habit_with_longest_run_streak_of_all()
-
-    print("find duplicates")
     
+    print(sql.habit)
+    
+    print(" ") 
+    print("Let's run the method 'get_habit_with_longest_run_streak_of_all()' on the tracker object!")
+    
+    habit = tracker.get_habit_with_longest_run_streak_of_all()
+    
+    print(habit)
+    
+    print(" ")
+    print("Let's run the method 'find_duplicates' on the tracker object!")
     
     output = tracker.find_duplicates()
     
     print(output)
-    print("Execute select habuts by time period")
     print(" ")
+    print("Let's run the method 'select_habits_by_time_period' on the tracker object!")
     out =tracker.select_habits_by_time_period("2025", "05")
     print(out)
+  
+    tracker.__prepend_habit("Study c", "2024-07-28", "2024-07-30", "D")
