@@ -2,7 +2,7 @@ import pandas as pd
 import datetime
 import sys
 from typing import Union
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 
 class Habit:

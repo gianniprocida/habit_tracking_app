@@ -42,17 +42,20 @@ While the virtual environment is activated, you can check the list of installed 
 ```
 pip list
 ```
-5. Install Required Python Packages.
+
+5. Upgrade Pip (if necessary).
+
+This ensures that you have the latest version of pip installed in your virtual environment.
+
+6. Install Required Python Packages.
 
 ```
 pip install matplotlib
 pip install pandas
 ```
-5. Upgrade Pip (if necessary).
 
-This ensures that you have the latest version of pip installed in your virtual environment.
 
-6. Run the Application and the Unit Test.
+7. Run the Application and the Unit Test.
 
 With the virtual environment activated and necessary packages installed, you can now run your application and unit test locally.
 
@@ -61,7 +64,7 @@ python3 habit_tracking_app.py
 python3 -m unittest test_habitTrackingApp_D.py
 ```
 
-7. Deactivate the Virtual Environment
+8. Deactivate the Virtual Environment
 
 Once you're done working with the application, you can deactivate the virtual environment using the command:
 
